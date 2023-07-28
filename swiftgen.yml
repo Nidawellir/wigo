@@ -1,0 +1,28 @@
+xcassets:
+  - inputs: Wigo/DesignSystem/Colors/Colors.xcassets
+    outputs:
+      - templateName: swift5
+        output: Wigo/DesignSystem/Colors/Colors.swift
+        params:
+          enumName: Colors
+
+  - inputs: Wigo/DesignSystem/Images/Images.xcassets
+    outputs:
+      - templateName: swift5
+        output: Wigo/DesignSystem/Images/Images.swift
+        params:
+          enumName: Images
+
+strings:
+  - inputs: Wigo/DesignSystem/Localizations/ru.lproj/Localizable.strings
+    outputs:
+      templateName: structured-swift5
+      output: Wigo/DesignSystem/Localizations/Localizations.swift
+      params:
+        enumName: Localizations
+
+fonts:
+  - inputs: Wigo/DesignSystem/Fonts
+    outputs: 
+      templateName: swift5
+      output: Wigo/DesignSystem/Fonts/Fonts.swift

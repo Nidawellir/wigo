@@ -1,0 +1,54 @@
+name: Wigo
+
+options:
+  bundleIdPrefix: com.semenov.Wigo
+  createIntermediateGroups: true
+  developmentLanguage: ru
+  useBaseInternationalization: false
+
+configs:
+  Development Debug: debug
+  Development Release: release
+
+settings:
+  DEVELOPMENT_TEAM: 2669Q34F5M
+  SWIFT_VERSION: "5.0"
+  IPHONEOS_DEPLOYMENT_TARGET: 13.0
+  MARKETING_VERSION: 1.0.0
+  CURRENT_PROJECT_VERSION: 1
+  ENABLE_TESTABILITY: "YES"
+  ONLY_ACTIVE_ARCH: "YES"
+  CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER: "YES"
+
+targets:
+  Wigo:
+    type: application
+    platform: iOS
+    scheme: {}
+    sources:
+      - Wigo
+      - path: Wigo/DesignSystem/Colors/Colors.swift
+        optional: true
+      - path: Wigo/DesignSystem/Fonts/Fonts.swift
+        optional: true
+      - path: Wigo/DesignSystem/Images/Images.swift
+        optional: true
+      - path: Wigo/DesignSystem/Localizations/Localizations.swift
+        optional: true
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.semenov.Wigo
+      TARGETED_DEVICE_FAMILY: 1
+      OTHER_LDFLAGS: -ObjC $(inherited)
+      DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+    prebuildScripts:
+      - script: swiftgen
+        name: Swiftgen
+        inputFiles:
+          - Wigo/DesignSystem/Colors/Colors.xcassets
+          - Wigo/DesignSystem/Images/Images.xcassets
+          - Wigo/DesignSystem/Localizations/ru.lproj/Localizable.strings
+        outputFiles:
+          - Wigo/DesignSystem/Colors/Colors.swift
+          - Wigo/DesignSystem/Fonts/Fonts.swift
+          - Wigo/DesignSystem/Images/Images.swift
+          - Wigo/DesignSystem/Localizations/Localizations.swift
