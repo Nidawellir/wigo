@@ -36,11 +36,11 @@ final class ContinueButton: UIButton {
     
     private func updateUI() {
         if isEnabled {
-            backgroundColor = .systemBlue
-            setTitleColor(.white, for: .normal)
+            backgroundColor = Colors.CreateAccount.systemBlueTextColor.color
+            setTitleColor(Colors.CreateAccount.whiteColor.color, for: .normal)
         } else {
             backgroundColor = .darkGray
-            setTitleColor(.lightGray, for: .normal)
+            setTitleColor(Colors.CreateAccount.lightGrayTetxColor.color, for: .normal)
         }
     }
     

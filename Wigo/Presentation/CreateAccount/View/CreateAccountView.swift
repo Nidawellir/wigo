@@ -41,7 +41,7 @@ final class CreateAccountView: UIView {
     }
     
     private func configureViews() {
-        backgroundColor = .black
+        backgroundColor = Colors.CreateAccount.darkBackground.color
         
         scrolView.showsVerticalScrollIndicator = false
         scrolView.backgroundColor = .clear
@@ -51,12 +51,12 @@ final class CreateAccountView: UIView {
         
         titleLabel.text = "Создать аккаунт"
         titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        titleLabel.textColor = .white
+        titleLabel.textColor = Colors.CreateAccount.whiteColor.color
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         myNumberLabel.text = "Мой номер"
         myNumberLabel.font = .systemFont(ofSize: 28, weight: .bold)
-        myNumberLabel.textColor = .white
+        myNumberLabel.textColor = Colors.CreateAccount.whiteColor.color
         myNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         
         plusNumberView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +65,7 @@ final class CreateAccountView: UIView {
             string: "926 987 65 43",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray]
         )
-        phoneNumberTextField.textColor = .white
+        phoneNumberTextField.textColor = Colors.CreateAccount.whiteColor.color
         phoneNumberTextField.font = .systemFont(ofSize: 24, weight: .medium)
         phoneNumberTextField.backgroundColor = .clear
         phoneNumberTextField.textDidChangeBlock = { [weak self] _ in self?.textFieldChanged() }
@@ -86,23 +86,23 @@ final class CreateAccountView: UIView {
 
         attributedString.append(NSAttributedString(
             string: "Нажимая кнопку «Продолжить» ты соглашаешься на ",
-            attributes: [.foregroundColor: UIColor.lightGray.cgColor]
+            attributes: [.foregroundColor: Colors.CreateAccount.lightGrayTetxColor.color]
         ))
         attributedString.append(NSAttributedString(
             string: "обработку персональных данных ",
-            attributes: [.foregroundColor: UIColor.systemBlue.cgColor]
+            attributes: [.foregroundColor: Colors.CreateAccount.systemBlueTextColor.color]
         ))
         attributedString.append(NSAttributedString(
             string: "и ",
-            attributes: [.foregroundColor: UIColor.lightGray.cgColor]
+            attributes: [.foregroundColor: Colors.CreateAccount.lightGrayTetxColor.color]
         ))
         attributedString.append(NSAttributedString(
             string: "политикой конфиденциальности ",
-            attributes: [.foregroundColor: UIColor.systemBlue.cgColor]
+            attributes: [.foregroundColor: Colors.CreateAccount.systemBlueTextColor.color]
         ))
         
         privacyPolicyButton.setAttributedTitle(attributedString, for: .normal)
-        privacyPolicyButton.titleLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
+        privacyPolicyButton.titleLabel?.font = .systemFont(ofSize: 10, weight: .semibold)
         privacyPolicyButton.titleLabel?.numberOfLines = 0
         privacyPolicyButton.titleLabel?.textAlignment = .center
 //        privacyPolicyButton.addTarget(self, action: #selector(didTapReulationsLabe), for: .touchUpInside)
@@ -114,9 +114,9 @@ final class CreateAccountView: UIView {
     
     private func textFieldChanged() {
         if phoneNumberTextField.text?.isEmpty == true {
-            delimiterView.backgroundColor = .gray
+            delimiterView.backgroundColor = Colors.CreateAccount.lightGrayTetxColor.color
         } else {
-            delimiterView.backgroundColor = .white
+            delimiterView.backgroundColor = Colors.CreateAccount.whiteColor.color
         }
         
         continueButton.isEnabled = phoneNumberTextField.phoneNumber()?.count == 10

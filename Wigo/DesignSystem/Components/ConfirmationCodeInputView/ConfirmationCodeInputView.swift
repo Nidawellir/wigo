@@ -24,8 +24,8 @@ final class ConfirmationCodeInputView: UIView {
     // MARK: - Constants
     
     private enum Constants {
-        static let stackViewSpacing: CGFloat = 8.0
-        static let inputTextFieldSize: CGSize = .init(width: 64.0, height: 64.0)
+        static let stackViewSpacing: CGFloat = 12.0
+        static let inputTextFieldSize: CGSize = .init(width: 50.0, height: 50.0)
     }
     
     // MARK: - Public properties
@@ -58,6 +58,7 @@ final class ConfirmationCodeInputView: UIView {
         inputTextFields.forEach { textField in
             textField.font = .systemFont(ofSize: 32, weight: .medium)
             textField.tintColor = .white
+            textField.textColor = .white
             textField.textAlignment = .center
             textField.keyboardType = .numberPad
             textField.addTarget(self, action: #selector(didChangedTextOfInputTextField), for: .editingChanged)

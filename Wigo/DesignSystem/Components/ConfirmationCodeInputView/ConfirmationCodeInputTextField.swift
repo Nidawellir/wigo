@@ -30,6 +30,7 @@ final class ConfirmationCodeInputTextField: UITextField {
     // MARK: - UI properties
     
     private let roundedContainerView: UIView = .init()
+    private let delimiterView: UIView = .init()
     
     // MARK: - Initialization
     
@@ -45,16 +46,25 @@ final class ConfirmationCodeInputTextField: UITextField {
         roundedContainerView.backgroundColor = .clear
         roundedContainerView.layer.cornerRadius = Constants.roundedContainerViewCornerRadius
         roundedContainerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        delimiterView.backgroundColor = .white
+        delimiterView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func configureLayouts() {
         addSubview(roundedContainerView)
+        addSubview(delimiterView)
         
         NSLayoutConstraint.activate([
             roundedContainerView.topAnchor.constraint(equalTo: topAnchor),
             roundedContainerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             roundedContainerView.trailingAnchor.constraint(equalTo: trailingAnchor),
             roundedContainerView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            delimiterView.topAnchor.constraint(equalTo: roundedContainerView.bottomAnchor, constant: 12),
+            delimiterView.leftAnchor.constraint(equalTo: roundedContainerView.leftAnchor),
+            delimiterView.rightAnchor.constraint(equalTo: roundedContainerView.rightAnchor),
+            delimiterView.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
     

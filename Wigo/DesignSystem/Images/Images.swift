@@ -22,7 +22,9 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Images {
-  internal static let test = ImageAsset(name: "test")
+  internal enum CreateAccount {
+    internal static let backArrow = ImageAsset(name: "createAccount/backArrow")
+  }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
