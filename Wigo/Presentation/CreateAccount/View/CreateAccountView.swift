@@ -73,7 +73,7 @@ final class CreateAccountView: UIView {
         phoneNumberTextField.config.defaultConfiguration = PhoneFormat(defaultPhoneFormat: "### ### ## ##")
         phoneNumberTextField.translatesAutoresizingMaskIntoConstraints = false
         
-        delimiterView.backgroundColor = .gray
+        delimiterView.backgroundColor = Colors.CreateAccount.lightGrayTetxColor.color
         delimiterView.translatesAutoresizingMaskIntoConstraints = false
         
         codeNoticeLabel.text = "Мы отправим сообщение с кодом подтвеврждения. За отправку сообщения может взиматься плата."

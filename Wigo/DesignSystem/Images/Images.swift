@@ -24,6 +24,8 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 internal enum Images {
   internal enum CreateAccount {
     internal static let backArrow = ImageAsset(name: "createAccount/backArrow")
+    internal static let grayCross = ImageAsset(name: "createAccount/grayCross")
+    internal static let whiteCross = ImageAsset(name: "createAccount/whiteCross")
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
