@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Твоя локация будет использована чтобы показать твою позицию на карте для поиска друзей.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Твоя локация будет использована чтобы показать твою позицию на карте для поиска друзей.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Твоя локация будет использована чтобы показать твою позицию на карте для поиска друзей.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
