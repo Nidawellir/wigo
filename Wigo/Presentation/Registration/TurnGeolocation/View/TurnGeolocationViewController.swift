@@ -11,6 +11,8 @@ final class TurnGeolocationViewController: UIViewController {
     
     // MARK: - Public properties
     
+    weak var output: TurnGeolocationModuleOutput?
+    
     // MARK: - Private properties
     
     private let presenter: TurnGeolocationPresenterInput
@@ -36,12 +38,25 @@ final class TurnGeolocationViewController: UIViewController {
         super.loadView()
         
         view = turnGeolocationView
+        turnGeolocationView.delegate = self
     }
 }
+
+// MARK: - TurnGeolocationModuleInpute
+
+extension TurnGeolocationViewController: TurnGeolocationModuleInpute {}
 
 // MARK: - Public methods
 
 extension TurnGeolocationViewController {}
+
+// MARK: - TurnGeolocationViewDelegate
+
+extension TurnGeolocationViewController: TurnGeolocationViewDelegate {
+    func didTapTurnButton() {
+        output?.openTurnNotification()
+    }
+}
 
 // MARK: - TurnGeolocationPresenterOutput
 

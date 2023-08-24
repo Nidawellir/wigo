@@ -14,7 +14,7 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
     public override func start(with input: Void, completionHandler: @escaping (()) -> Void) {
         super.start(with: input, completionHandler: completionHandler)
         
-        coordinateToRegistration()
+        coordinateToOnboarding()
 //        if isAuthorized {
 //            coordinateToHome()
 //        } else {
@@ -34,6 +34,23 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
             else { return }
             
             self.decapture(coordinator: registrationCoordinator)
+            
+            self.coordinateToHome()
+        })
+    }
+    
+    private func coordinateToOnboarding() {
+        let onboardingCoordinator = OnboardingCoordinator(navigationController: navigationController)
+        
+        capture(coordinator: onboardingCoordinator)
+        
+        onboardingCoordinator.start(with: (), completionHandler: { [weak self, weak onboardingCoordinator] _ in
+            guard
+                let self = self,
+                let onboardingCoordinator = onboardingCoordinator
+            else { return }
+            
+            self.decapture(coordinator: onboardingCoordinator)
             
             self.coordinateToHome()
         })

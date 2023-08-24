@@ -11,6 +11,8 @@ final class TurnNotificationsViewController: UIViewController {
     
     // MARK: - Public properties
     
+    weak var output: TurnNotificationsModuleOutput?
+    
     // MARK: - Private properties
     
     private let presenter: TurnNotificationsPresenterInput
@@ -36,12 +38,23 @@ final class TurnNotificationsViewController: UIViewController {
         super.loadView()
         
         view = turnNotificationsView
+        turnNotificationsView.delegate = self
     }
 }
+
+// MARK: - TurnNotificationsModuleInput
+
+extension TurnNotificationsViewController: TurnNotificationsModuleInput {}
 
 // MARK: - Public methods
 
 extension TurnNotificationsViewController {}
+
+extension TurnNotificationsViewController: TurnNotificationsViewDelegate {
+    func didTapNotNow() {
+        output?.openOnboarding()
+    }
+}
 
 // MARK: - TurnNotificationsPresenterOutput
 

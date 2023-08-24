@@ -9,6 +9,8 @@ import UIKit
 
 protocol GendereViewDelegate: AnyObject {
     func didTapContinueButton(with gender: String)
+    func closeGender()
+    func openTurnGeolocation()
 }
 
 final class GendereView: UIView {
@@ -48,6 +50,7 @@ final class GendereView: UIView {
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
+        backButton.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
         backButton.setImage(Images.CreateAccount.backArrow.image, for: .normal)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -75,6 +78,11 @@ final class GendereView: UIView {
     }
     
     @objc
+    private func didTapBackButton() {
+        delegate?.closeGender()
+    }
+    
+    @objc
     private func didTapManGenderButton() {
         manGenderButton.isEnabled = false
         womanGenderButton.isEnabled = true
@@ -95,6 +103,8 @@ final class GendereView: UIView {
         } else {
             delegate?.didTapContinueButton(with: "Женщина")
         }
+        
+        delegate?.openTurnGeolocation()
     }
     
     private func configureLayouts() {

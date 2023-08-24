@@ -9,4 +9,5 @@ import Foundation
 
 protocol YourBirthdayModuleOutput: AnyObject {
     func closeYourBirthday()
+    func openGender()
 }

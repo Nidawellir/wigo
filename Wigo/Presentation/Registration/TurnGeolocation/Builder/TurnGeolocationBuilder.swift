@@ -8,12 +8,13 @@
 import UIKit
 
 enum TurnGeolocationBuilder {
-    static func build() -> UIViewController {
+    static func build(with output: TurnGeolocationModuleOutput? = nil) -> (UIViewController, TurnGeolocationModuleInpute) {
         let presenter = TurnGeolocationPresenter()
         let viewController = TurnGeolocationViewController(presenter: presenter)
         
         presenter.output = viewController
+        viewController.output = output
         
-        return viewController
+        return (viewController, viewController)
     }
 }

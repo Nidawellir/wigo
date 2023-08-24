@@ -54,6 +54,14 @@ extension YourBirthdayViewController {}
 // MARK: - YourBirthdayViewDelegate
 
 extension YourBirthdayViewController: YourBirthdayViewDelegate {
+    func openGender() {
+        output?.openGender()
+    }
+    
+    func closeYourBirthday() {
+        output?.closeYourBirthday()
+    }
+    
     func didTapContinueButton(with birtday: String) {
         presenter.fetchBirthday(for: birtday)
     }

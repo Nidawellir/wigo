@@ -8,12 +8,13 @@
 import UIKit
 
 enum TurnNotificationsBuilder {
-    static func build() -> UIViewController {
+    static func build(with output: TurnNotificationsModuleOutput? = nil) -> (UIViewController, TurnNotificationsModuleInput) {
         let presenter = TurnNotificationsPresenter()
         let viewController = TurnNotificationsViewController(presenter: presenter)
         
         presenter.output = viewController
+        viewController.output = output
         
-        return viewController
+        return (viewController, viewController)
     }
 }

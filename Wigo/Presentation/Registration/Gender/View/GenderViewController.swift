@@ -11,6 +11,8 @@ final class GendereViewController: UIViewController {
     
     // MARK: - Public properties
     
+    weak var output: GenderModuleOutput?
+    
     // MARK: - Private properties
     
     private let presenter: GenderePresenterInput
@@ -41,11 +43,25 @@ final class GendereViewController: UIViewController {
     }
 }
 
+// MARK: - GenderModuleInput
+
+extension GendereViewController: GenderModuleInput {}
+
 // MARK: - Public methods
 
 extension GendereViewController {}
 
+// MARK: - GendereViewDelegate
+
 extension GendereViewController: GendereViewDelegate {
+    func openTurnGeolocation() {
+        output?.openTurnGeolocation()
+    }
+    
+    func closeGender() {
+        output?.closeGender()
+    }
+    
     func didTapContinueButton(with gender: String) {
         presenter.feathYourGender(for: gender)
     }

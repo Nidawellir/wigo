@@ -11,6 +11,8 @@ final class TemplateViewController: UIViewController {
     
     // MARK: - Public properties
     
+    weak var output: TemplateModuleOutput?
+    
     // MARK: - Private properties
     
     private let presenter: TemplatePresenterInput
@@ -38,6 +40,10 @@ final class TemplateViewController: UIViewController {
         view = templateView
     }
 }
+
+// MARK: - TemplateModuleInput
+
+extension TemplateViewController: TemplateModuleInput {}
 
 // MARK: - Public methods
 

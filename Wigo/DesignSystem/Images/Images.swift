@@ -30,8 +30,15 @@ internal enum Images {
     internal static let whiteCross = ImageAsset(name: "createAccount/whiteCross")
   }
   internal enum CreateAccountOnboarding {
+    internal static let eight = ImageAsset(name: "createAccountOnboarding/eight")
     internal static let first = ImageAsset(name: "createAccountOnboarding/first")
+    internal static let five = ImageAsset(name: "createAccountOnboarding/five")
+    internal static let four = ImageAsset(name: "createAccountOnboarding/four")
+    internal static let nine = ImageAsset(name: "createAccountOnboarding/nine")
     internal static let second = ImageAsset(name: "createAccountOnboarding/second")
+    internal static let seven = ImageAsset(name: "createAccountOnboarding/seven")
+    internal static let six = ImageAsset(name: "createAccountOnboarding/six")
+    internal static let ten = ImageAsset(name: "createAccountOnboarding/ten")
     internal static let third = ImageAsset(name: "createAccountOnboarding/third")
   }
 }

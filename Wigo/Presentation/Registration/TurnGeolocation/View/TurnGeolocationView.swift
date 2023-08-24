@@ -8,9 +8,15 @@
 import UIKit
 import MapKit
 
+protocol TurnGeolocationViewDelegate: AnyObject {
+    func didTapTurnButton()
+}
+
 final class TurnGeolocationView: UIView {
     
     // MARK: - Public properties
+    
+    weak var delegate: TurnGeolocationViewDelegate?
     
     // MARK: - Private properties
     
@@ -28,8 +34,6 @@ final class TurnGeolocationView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        
         
         configureViews()
         configureLayouts()
@@ -72,6 +76,8 @@ final class TurnGeolocationView: UIView {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
+        
+        delegate?.didTapTurnButton()
     }
     
     private func configureLayouts() {

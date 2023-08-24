@@ -15,6 +15,9 @@ final class RegistrationCoordinator: BaseCoordinator<Void, Void> {
     private weak var smsCodeModuleInput: SMSCodeModuleInput?
     private weak var yourNameModuleInput: YourNameModuleInput?
     private weak var yourBirtdayModuleInput: YourBirthdayModuleInput?
+    private weak var genderModuleInput: GenderModuleInput?
+    private weak var turnGeolocationModuleInput: TurnGeolocationModuleInpute?
+    private weak var turnNotificationsModuleInput: TurnNotificationsModuleInput?
     
     // MARK: - Override methods
     
@@ -76,7 +79,49 @@ extension RegistrationCoordinator: YourNameModuleOutput {
 // MARK: - YourBirthdayModuleOutput
 
 extension RegistrationCoordinator: YourBirthdayModuleOutput {
+    func openGender() {
+        let genderViewController: UIViewController
+        
+        (genderViewController, genderModuleInput) = GenderBuilder.build(with: self)
+                
+        navigationController.pushViewController(genderViewController, animated: true)
+    }
+    
     func closeYourBirthday() {
         navigationController.popViewController(animated: true)
+    }
+}
+
+// MARK: - GenderModuleOutput
+
+extension RegistrationCoordinator: GenderModuleOutput {
+    func openTurnGeolocation() {
+        let turnGeolocationViewController: UIViewController
+        
+        (turnGeolocationViewController, turnGeolocationModuleInput) = TurnGeolocationBuilder.build(with: self)
+                
+        navigationController.pushViewController(turnGeolocationViewController, animated: true)
+    }
+    
+    func closeGender() {
+        navigationController.popViewController(animated: true)
+    }
+}
+
+// MARK: - TurnGeolocationModuleOutput
+
+extension RegistrationCoordinator: TurnGeolocationModuleOutput {
+    func openTurnNotification() {
+        let turnNotificationsViewController: UIViewController
+        
+        (turnNotificationsViewController, turnNotificationsModuleInput) = TurnNotificationsBuilder.build(with: self)
+                
+        navigationController.pushViewController(turnNotificationsViewController, animated: true)
+    }
+}
+
+extension RegistrationCoordinator: TurnNotificationsModuleOutput {
+    func openOnboarding() {
+        
     }
 }

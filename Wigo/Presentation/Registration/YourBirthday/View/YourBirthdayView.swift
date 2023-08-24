@@ -9,6 +9,8 @@ import UIKit
 
 protocol YourBirthdayViewDelegate: AnyObject {
     func didTapContinueButton(with birtday: String)
+    func closeYourBirthday()
+    func openGender()
 }
 
 final class YourBirthdayView: UIView {
@@ -57,6 +59,7 @@ final class YourBirthdayView: UIView {
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
+        backButton.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
         backButton.setImage(Images.CreateAccount.backArrow.image, for: .normal)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -127,7 +130,14 @@ final class YourBirthdayView: UIView {
     }
     
     @objc
+    private func didTapBackButton() {
+        delegate?.closeYourBirthday()
+    }
+    
+    @objc
     private func didTapContinueButton() {
+        delegate?.openGender()
+        
         guard let day = dayTextField.text else { return }
         guard let month = monthTextField.text else { return }
         guard let year = yearTextField.text else { return }
