@@ -1,11 +1,11 @@
 //
-//  MarkIntroCompleteUsecase.swift
+//  SetIntroCompletedUsecase.swift
 //  Wigo
 //
 //  Created by Apple User on 8/30/23.
 //
 
-final class MarkIntroCompleteUsecase {
+final class SetIntroCompletedUsecase {
     
     // MARK: - Private properties
     
@@ -19,7 +19,9 @@ final class MarkIntroCompleteUsecase {
     }
 }
 
-extension MarkIntroCompleteUsecase {
+// MARK: - Public methods
+
+extension SetIntroCompletedUsecase {
     func execute() {
         userDefaultsGateway.save(object: true, key: isIntroCompletedKey)
     }

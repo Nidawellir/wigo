@@ -38,6 +38,13 @@ final class IntroViewController: UIViewController {
         super.loadView()
         
         view = introView
+        introView.delegate = self
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        presenter.fetchIntroViewModels()
     }
 }
 
@@ -49,6 +56,18 @@ extension IntroViewController: IntroModuleInput {}
 
 extension IntroViewController {}
 
+// MARK: - IntroViewDelegate
+
+extension IntroViewController: IntroViewDelegate {
+    func didTapContinueButton() {
+        output?.skipIntro()
+    }
+}
+
 // MARK: - IntroPresenterOutput
 
-extension IntroViewController: IntroPresenterOutput {}
+extension IntroViewController: IntroPresenterOutput {
+    func didFetchIntro(viewModels: [IntroCollectionViewCell.ViewModel]) {
+        introView.set(viewModels: viewModels)
+    }
+}

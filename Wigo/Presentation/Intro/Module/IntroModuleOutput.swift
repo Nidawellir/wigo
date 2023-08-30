@@ -7,4 +7,6 @@
 
 import Foundation
 
-protocol IntroModuleOutput: AnyObject {}
+protocol IntroModuleOutput: AnyObject {
+    func skipIntro()
+}

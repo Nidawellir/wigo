@@ -9,6 +9,7 @@ import UIKit
 
 protocol OnboardingViewDelegate: AnyObject {
     func didTapView()
+    func didTapSkipButton()
 }
 
 final class OnboardingView: UIView {
@@ -22,6 +23,7 @@ final class OnboardingView: UIView {
     // MARK: - UI properties
     
     private let imageView: UIImageView = .init()
+    private let skipButton: UIButton = .init()
     
     // MARK: - Initialization
     
@@ -39,6 +41,9 @@ final class OnboardingView: UIView {
         addGestureRecognizer(tap)
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        skipButton.addTarget(self, action: #selector(didTapSkipButton), for: .touchUpInside)
+        skipButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
     @objc
@@ -47,14 +52,27 @@ final class OnboardingView: UIView {
         
     }
     
+    @objc
+    private func didTapSkipButton() {
+        delegate?.didTapSkipButton()
+        
+    }
+    
     private func configureLayouts() {
         addSubview(imageView)
+        addSubview(skipButton)
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             imageView.leftAnchor.constraint(equalTo: leftAnchor),
             imageView.rightAnchor.constraint(equalTo: rightAnchor),
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            skipButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50),
+            skipButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -30),
+            skipButton.heightAnchor.constraint(equalToConstant: 40),
+            skipButton.widthAnchor.constraint(equalToConstant: 100),
+            
         ])
     }
     

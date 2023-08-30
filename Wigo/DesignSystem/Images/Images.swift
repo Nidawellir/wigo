@@ -41,6 +41,13 @@ internal enum Images {
     internal static let ten = ImageAsset(name: "createAccountOnboarding/ten")
     internal static let third = ImageAsset(name: "createAccountOnboarding/third")
   }
+  internal enum Intro {
+    internal static let firstIntro = ImageAsset(name: "intro/firstIntro")
+    internal static let four = ImageAsset(name: "intro/four")
+    internal static let logo = ImageAsset(name: "intro/logo")
+    internal static let secondIntro = ImageAsset(name: "intro/secondIntro")
+    internal static let thirdIntro = ImageAsset(name: "intro/thirdIntro")
+  }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

@@ -7,4 +7,6 @@
 
 import Foundation
 
-protocol OnboardingModuleOutput: AnyObject {}
+protocol OnboardingModuleOutput: AnyObject {
+    func skipOnboarding()
+}

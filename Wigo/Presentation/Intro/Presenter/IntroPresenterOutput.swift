@@ -5,4 +5,6 @@
 //  Created by Apple User on 7/25/23.
 //
 
-protocol IntroPresenterOutput: AnyObject {}
+protocol IntroPresenterOutput: AnyObject {
+    func didFetchIntro(viewModels: [IntroCollectionViewCell.ViewModel])
+}

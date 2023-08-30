@@ -51,8 +51,12 @@ extension TurnNotificationsViewController: TurnNotificationsModuleInput {}
 extension TurnNotificationsViewController {}
 
 extension TurnNotificationsViewController: TurnNotificationsViewDelegate {
-    func didTapNotNow() {
+    func didTapTurnButton() {
         output?.openOnboarding()
+    }
+    
+    func didTapNotNow() {
+        
     }
 }
 

@@ -10,11 +10,16 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        injectDataInToDomain()
         return true
+    }
+    
+    private func injectDataInToDomain() {
+        let gatewaysFactory = GatewaysFactory.shared
+        let usecasesFactory = UsecasesFactory.shared
+        
+        usecasesFactory.inject(gatewaysFactory: gatewaysFactory)
     }
 
     // MARK: UISceneSession Lifecycle

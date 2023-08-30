@@ -26,4 +26,8 @@ final class OnboardingCoordinator: BaseCoordinator<Void, Void> {
     }
 }
 
-extension OnboardingCoordinator: OnboardingModuleOutput {}
+extension OnboardingCoordinator: OnboardingModuleOutput {
+    func skipOnboarding() {
+        completionHandler?(())
+    }
+}

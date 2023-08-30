@@ -59,6 +59,10 @@ extension OnboardingViewController {}
 // MARK: - OnboardingViewDelegate
 
 extension OnboardingViewController: OnboardingViewDelegate {
+    func didTapSkipButton() {
+        output?.skipOnboarding()
+    }
+    
     func didTapView() {
         presenter.fetchNextImage()
     }

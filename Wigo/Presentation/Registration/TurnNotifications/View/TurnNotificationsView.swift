@@ -9,6 +9,7 @@ import UIKit
 
 protocol TurnNotificationsViewDelegate: AnyObject {
     func didTapNotNow()
+    func didTapTurnButton()
 }
 
 final class TurnNotificationsView: UIView {
@@ -59,7 +60,7 @@ final class TurnNotificationsView: UIView {
         descriptionLabel.textColor = Colors.CreateAccount.whiteColor.color
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
-//        turnButton.addTarget(self, action: #selector(didTapTurnButton), for: .touchUpInside)
+        turnButton.addTarget(self, action: #selector(didTapTurnButton), for: .touchUpInside)
         turnButton.translatesAutoresizingMaskIntoConstraints = false
         
         notNowLabel.backgroundColor = .clear
@@ -70,6 +71,11 @@ final class TurnNotificationsView: UIView {
         
         let gesture = UIGestureRecognizer(target: self, action: #selector(didTapNotNow))
         notNowLabel.addGestureRecognizer(gesture)
+    }
+    
+    @objc
+    private func didTapTurnButton() {
+        delegate?.didTapTurnButton()
     }
     
     @objc

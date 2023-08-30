@@ -2,24 +2,30 @@
 //  File.swift
 //  
 //
-//  Created by Евгений Капанов on 16.08.2022.
+//  Created by Aleksey Fedorov on 16.08.2022.
 //
 
 public final class AppCoordinator: BaseCoordinator<Void, Void> {
     
     // MARK: - Usecases
     
+    private let getIsIntroCompletedUsecase: GetIsIntroCompletedUsecase = UsecasesFactory.shared.resolve()
+    private let setIntroCompletedUsecase: SetIntroCompletedUsecase = UsecasesFactory.shared.resolve()
+    
     // MARK: - Override methods
     
     public override func start(with input: Void, completionHandler: @escaping (()) -> Void) {
         super.start(with: input, completionHandler: completionHandler)
         
-        coordinateToOnboarding()
-//        if isAuthorized {
-//            coordinateToHome()
-//        } else {
-//            coordinateToRegistration()
-//        }
+        coordinateToRequired()
+    }
+    
+    private func coordinateToRequired() {
+        if getIsIntroCompletedUsecase.execute() == true {
+            coordinateToRegistration()
+        } else {
+            coordinateToIntro()
+        }
     }
     
     private func coordinateToRegistration() {
@@ -35,7 +41,7 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
             
             self.decapture(coordinator: registrationCoordinator)
             
-            self.coordinateToHome()
+            self.coordinateToOnboarding()
         })
     }
     
@@ -53,6 +59,25 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
             self.decapture(coordinator: onboardingCoordinator)
             
             self.coordinateToHome()
+        })
+    }
+    
+    private func coordinateToIntro() {
+        let introCoordinator = IntroCoordonator(navigationController: navigationController)
+        
+        capture(coordinator: introCoordinator)
+        
+        introCoordinator.start(with: (), completionHandler: { [weak self, weak introCoordinator] _ in
+            guard
+                let self = self,
+                let introCoordinator = introCoordinator
+            else { return }
+            
+            self.decapture(coordinator: introCoordinator)
+
+            self.setIntroCompletedUsecase.execute()
+            
+            self.coordinateToRequired()
         })
     }
     
