@@ -32,6 +32,30 @@ final class UsecasesFactory {
             userDefaultsGateway: gatewaysFactory.resolve()
         )
     }
+    
+    func resolve() -> SetRegistrationCompletedUsecese {
+        return SetRegistrationCompletedUsecese(
+            userDefaultsGateway: gatewaysFactory.resolve()
+        )
+    }
+    
+    func resolve() -> GetInRegistrationCompletedUsecese {
+        return GetInRegistrationCompletedUsecese(
+            userDefaultsGateway: gatewaysFactory.resolve()
+        )
+    }
+    
+    func resolve() -> SetOnboardingCompletedUsecase {
+        return SetOnboardingCompletedUsecase(
+            userDefaultsGateway: gatewaysFactory.resolve()
+        )
+    }
+    
+    func resolve() -> GetInOnboardingCompletedUsecase {
+        return GetInOnboardingCompletedUsecase(
+            userDefaultsGateway: gatewaysFactory.resolve()
+        )
+    }
 }
 
 // MARK: - Inject dependency

@@ -28,6 +28,9 @@ internal enum Colors {
     internal static let systemBlueTextColor = ColorAsset(name: "createAccount/systemBlueTextColor")
     internal static let whiteColor = ColorAsset(name: "createAccount/whiteColor")
   }
+  internal enum MainScrean {
+    internal static let cellBackground = ColorAsset(name: "mainScrean/cellBackground")
+  }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

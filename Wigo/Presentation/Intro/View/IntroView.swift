@@ -145,8 +145,6 @@ final class IntroView: UIView {
     }
     
     // MARK: - Override methods
-    
-    
 }
 
 // MARK: - Public methods

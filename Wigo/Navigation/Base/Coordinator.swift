@@ -2,7 +2,7 @@
 //  File.swift
 //  
 //
-//  Created by Евгений Капанов on 16.08.2022.
+//  Created by Aleksey Fedororv on 16.08.2023.
 //
 
 public protocol Coordinator: AnyCoordinator {

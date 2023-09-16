@@ -48,6 +48,15 @@ internal enum Images {
     internal static let secondIntro = ImageAsset(name: "intro/secondIntro")
     internal static let thirdIntro = ImageAsset(name: "intro/thirdIntro")
   }
+  internal enum MainScrean {
+    internal static let addEventButton = ImageAsset(name: "mainScrean/addEventButton")
+    internal static let avatar = ImageAsset(name: "mainScrean/avatar")
+    internal static let background = ImageAsset(name: "mainScrean/background")
+    internal static let filterButton = ImageAsset(name: "mainScrean/filterButton")
+    internal static let location = ImageAsset(name: "mainScrean/location")
+    internal static let mute = ImageAsset(name: "mainScrean/mute")
+    internal static let setting = ImageAsset(name: "mainScrean/setting")
+  }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

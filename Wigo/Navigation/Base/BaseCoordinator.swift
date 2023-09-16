@@ -2,7 +2,7 @@
 //  File.swift
 //  
 //
-//  Created by Евгений Капанов on 16.08.2022.
+//  Created by Aleksey Fedorov on 16.08.2023.
 //
 
 import UIKit

@@ -32,10 +32,6 @@ final class IntroCollectionViewCell: UICollectionViewCell {
         configureLayouts()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private func configureViews() {
         backgroundColor = Colors.CreateAccount.darkBackground.color
         layer.cornerRadius = 12
@@ -76,6 +72,10 @@ final class IntroCollectionViewCell: UICollectionViewCell {
             descriptionLabel.rightAnchor.constraint(equalTo: rightAnchor),
             descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 

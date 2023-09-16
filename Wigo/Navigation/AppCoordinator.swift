@@ -11,6 +11,10 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
     
     private let getIsIntroCompletedUsecase: GetIsIntroCompletedUsecase = UsecasesFactory.shared.resolve()
     private let setIntroCompletedUsecase: SetIntroCompletedUsecase = UsecasesFactory.shared.resolve()
+    private let getInRegistrationCompletedUsecese: GetInRegistrationCompletedUsecese = UsecasesFactory.shared.resolve()
+    private let setRegistrationCompletedUsecese: SetRegistrationCompletedUsecese = UsecasesFactory.shared.resolve()
+    private let getInOnboardingCompletedUsecase: GetInOnboardingCompletedUsecase = UsecasesFactory.shared.resolve()
+    private let setOnboardingCompletedUsecase: SetOnboardingCompletedUsecase = UsecasesFactory.shared.resolve()
     
     // MARK: - Override methods
     
@@ -26,40 +30,18 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
         } else {
             coordinateToIntro()
         }
-    }
-    
-    private func coordinateToRegistration() {
-        let registrationCoordinator = RegistrationCoordinator(navigationController: navigationController)
         
-        capture(coordinator: registrationCoordinator)
+        if getInRegistrationCompletedUsecese.execute() == true {
+            coordinateToOnboarding()
+        } else {
+            coordinateToRegistration()
+        }
         
-        registrationCoordinator.start(with: (), completionHandler: { [weak self, weak registrationCoordinator] _ in
-            guard
-                let self = self,
-                let registrationCoordinator = registrationCoordinator
-            else { return }
-            
-            self.decapture(coordinator: registrationCoordinator)
-            
-            self.coordinateToOnboarding()
-        })
-    }
-    
-    private func coordinateToOnboarding() {
-        let onboardingCoordinator = OnboardingCoordinator(navigationController: navigationController)
-        
-        capture(coordinator: onboardingCoordinator)
-        
-        onboardingCoordinator.start(with: (), completionHandler: { [weak self, weak onboardingCoordinator] _ in
-            guard
-                let self = self,
-                let onboardingCoordinator = onboardingCoordinator
-            else { return }
-            
-            self.decapture(coordinator: onboardingCoordinator)
-            
-            self.coordinateToHome()
-        })
+        if getInOnboardingCompletedUsecase.execute() == true {
+            coordinateToMainScrean()
+        } else {
+            coordinateToOnboarding()
+        }
     }
     
     private func coordinateToIntro() {
@@ -78,6 +60,59 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
             self.setIntroCompletedUsecase.execute()
             
             self.coordinateToRequired()
+        })
+    }
+    
+    private func coordinateToRegistration() {
+        let registrationCoordinator = RegistrationCoordinator(navigationController: navigationController)
+        
+        capture(coordinator: registrationCoordinator)
+        
+        registrationCoordinator.start(with: (), completionHandler: { [weak self, weak registrationCoordinator] _ in
+            guard
+                let self = self,
+                let registrationCoordinator = registrationCoordinator
+            else { return }
+            
+            self.decapture(coordinator: registrationCoordinator)
+            
+            self.setRegistrationCompletedUsecese.execute()
+            
+            self.coordinateToRequired()
+        })
+    }
+    
+    private func coordinateToOnboarding() {
+        let onboardingCoordinator = OnboardingCoordinator(navigationController: navigationController)
+        
+        capture(coordinator: onboardingCoordinator)
+        
+        onboardingCoordinator.start(with: (), completionHandler: { [weak self, weak onboardingCoordinator] _ in
+            guard
+                let self = self,
+                let onboardingCoordinator = onboardingCoordinator
+            else { return }
+            
+            self.decapture(coordinator: onboardingCoordinator)
+            
+            self.setOnboardingCompletedUsecase.execute()
+            
+            self.coordinateToHome()
+        })
+    }
+    
+    private func coordinateToMainScrean() {
+        let mainScreanCoordinator = MainScreanCoordinator(navigationController: navigationController)
+        
+        capture(coordinator: mainScreanCoordinator)
+        
+        mainScreanCoordinator.start(with: (), completionHandler: { [weak self, weak mainScreanCoordinator] _ in
+            guard
+                let self = self,
+                let mainScreanCoordinator = mainScreanCoordinator
+            else { return }
+            
+            self.decapture(coordinator: mainScreanCoordinator)
         })
     }
     
