@@ -38,13 +38,14 @@ final class MainScreanViewController: UIViewController {
         super.loadView()
         
         view = mainScreanView
+        mainScreanView.delegate = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         presenter.fetchFilterViewModls()
-        presenter.fetchMatchingFiltersModels()
+        presenter.fetchVideoCardModels()
     }
 }
 
@@ -56,18 +57,22 @@ extension MainScreanViewController: MainScreanModuleInput {}
 
 extension MainScreanViewController {}
 
+// MARK: - MainScreanViewDelegate
+
+extension MainScreanViewController: MainScreanViewDelegate {
+    func didTapEventButton() {
+        output?.openVideoOnboarding()
+    }
+}
+
 // MARK: - MainScreanPresenterOutput
 
 extension MainScreanViewController: MainScreanPresenterOutput {
-    func didFetchMatchingFilter(viewModels: [MatchingFiltersCollectionViewCell.ViewModel]) {
-        mainScreanView.setMatchingFilters(viewModel: viewModels)
-        
-        print("222222 \(viewModels)")
+    func didFetcVideoCard(viewModel: [VideoCardView.ViewModel]) {
+        mainScreanView.setVideoCards(viewModel: viewModel)
     }
     
     func didFetchFilter(viewModels: [FilterCollectionViewCell.ViewModel]) {
         mainScreanView.setFilters(viewModels: viewModels)
-        
-        
     }
 }

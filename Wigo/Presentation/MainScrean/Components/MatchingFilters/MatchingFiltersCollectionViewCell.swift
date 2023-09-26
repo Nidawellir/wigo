@@ -73,7 +73,9 @@ final class MatchingFiltersCollectionViewCell: UICollectionViewCell {
 // MARK: - Public methods
 
 extension MatchingFiltersCollectionViewCell {
-    func set(viewModel: ViewModel) {
-        titleLabel.text = viewModel.title
+    func set(title: String) {
+        titleLabel.text = title
+        
+        print("123456")
     }
 }

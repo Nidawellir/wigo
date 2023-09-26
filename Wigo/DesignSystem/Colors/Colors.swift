@@ -29,7 +29,10 @@ internal enum Colors {
     internal static let whiteColor = ColorAsset(name: "createAccount/whiteColor")
   }
   internal enum MainScrean {
+    internal static let buttonBackground = ColorAsset(name: "mainScrean/buttonBackground")
     internal static let cellBackground = ColorAsset(name: "mainScrean/cellBackground")
+    internal static let leftSwipe = ColorAsset(name: "mainScrean/leftSwipe")
+    internal static let rightSwipe = ColorAsset(name: "mainScrean/rightSwipe")
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

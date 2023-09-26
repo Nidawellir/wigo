@@ -29,5 +29,7 @@ final class MainScreanCoordinator: BaseCoordinator<Void, Void> {
 // MARK: - IntroModuleOutput
 
 extension MainScreanCoordinator: MainScreanModuleOutput {
-    
+    func openVideoOnboarding() {
+        
+    }
 }

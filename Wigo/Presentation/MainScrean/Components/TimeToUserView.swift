@@ -37,7 +37,6 @@ final class TimeToUserView: UIView {
         locationImageView.image = Images.MainScrean.location.image
         locationImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        timeLabel.text = "sdff"
         timeLabel.font = .systemFont(ofSize: 12, weight: .semibold)
         timeLabel.textColor = Colors.CreateAccount.lightGrayTetxColor.color
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -63,5 +62,9 @@ final class TimeToUserView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setTime(time: String) {
+        timeLabel.text = time
     }
 }

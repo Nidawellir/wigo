@@ -11,7 +11,7 @@ final class MatchingFiltersView: UIView {
     
     // MARK: - Private properties
     
-    private var matchingFiltersModels: [MatchingFiltersCollectionViewCell.ViewModel] = []
+    private var matchingFiltersModels: [String] = []
     
     // MARK: - Identifier
     
@@ -35,8 +35,6 @@ final class MatchingFiltersView: UIView {
         
         configureViews()
         configureLayouts()
-        
-        collectionView.reloadData()
     }
     
     private func configureViews() {
@@ -78,8 +76,12 @@ final class MatchingFiltersView: UIView {
 // MARK: - Public methods
 
 extension MatchingFiltersView {
-    func set(viewModels: [MatchingFiltersCollectionViewCell.ViewModel]) {
+    func set(viewModels: [String]) {
         matchingFiltersModels = viewModels
+        
+        collectionView.reloadData()
+        
+        print("set1")
     }
 }
 
@@ -96,11 +98,7 @@ extension MatchingFiltersView: UICollectionViewDataSource {
             for: indexPath
         ) as? MatchingFiltersCollectionViewCell
 
-        cell?.set(
-            viewModel: .init(
-                title: matchingFiltersModels[indexPath.row].title
-            )
-        )
+        cell?.set(title: matchingFiltersModels[indexPath.row])
         
         return cell ?? UICollectionViewCell()
     }
@@ -110,6 +108,6 @@ extension MatchingFiltersView: UICollectionViewDataSource {
 
 extension MatchingFiltersView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: matchingFiltersModels[indexPath.item].title.size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 11)]).width + 20, height: 30)
+        return CGSize(width: matchingFiltersModels[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 11)]).width + 20, height: 30)
     }
 }

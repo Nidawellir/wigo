@@ -47,15 +47,18 @@ final class MainScreanPresenter {
         .init(title: "asdggg133"),
     ]
     
-    
+    private let videoCardModels: [VideoCardView.ViewModel] = [
+        .init(name: "Zahar", description: "Балуется пальчиком в попке", location: "У себя дома", timeToUser: "1", videoFileName: "wild", videoFormatName: "mp4", matchingFilters: ["sdadsada", "sadaddsd", "dadaad", "dsadas"]),
+        .init(name: "Olegsey", description: "Сидит на бутылке", location: "За спиной у матери", timeToUser: "5", videoFileName: "wild", videoFormatName: "mp4", matchingFilters: ["sdadsada", "sadaddsd", "dadaad", "dsadas"]),
+        .init(name: "Daria", description: "Смотрит как Олегсей сидит на бутылке", location: "За спиной у Олегсея", timeToUser: "5", videoFileName: "wild", videoFormatName: "mp4", matchingFilters: ["sdadsada", "sadaddsd", "dadaad", "dsadas"]),
+    ]
 }
 
 // MARK: - MainScreanPresenterInput
 
 extension MainScreanPresenter: MainScreanPresenterInput {
-    func fetchMatchingFiltersModels() {
-        output?.didFetchMatchingFilter(viewModels: matchingFiltersModel)
-        print("111112\(matchingFiltersModel)")
+    func fetchVideoCardModels() {
+        output?.didFetcVideoCard(viewModel: videoCardModels)
     }
     
     func fetchFilterViewModls() {

@@ -7,7 +7,9 @@
 
 import UIKit
 
-protocol MainScreanViewDelegate: AnyObject {}
+protocol MainScreanViewDelegate: AnyObject {
+    func didTapEventButton()
+}
 
 final class MainScreanView: UIView {
     
@@ -19,8 +21,8 @@ final class MainScreanView: UIView {
     
     private let customNavigationBarView: CustomNavigationBarView = .init()
     private let filterView: FilterView = .init()
-    private let userFeedView: UserFeedView = .init()
-    
+    private let videoCardsContainerView: VideoCardsContainerView = .init()
+//    private let findEventsView: FindEventsView = .init()
 
     // MARK: - Initialization
     
@@ -40,13 +42,17 @@ final class MainScreanView: UIView {
         
         filterView.translatesAutoresizingMaskIntoConstraints = false
         
-        userFeedView.translatesAutoresizingMaskIntoConstraints = false
+        videoCardsContainerView.isHidden = false
+        videoCardsContainerView.translatesAutoresizingMaskIntoConstraints = false
+        
+//        findEventsView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func configureLayouts() {
         addSubview(customNavigationBarView)
         addSubview(filterView)
-        addSubview(userFeedView)
+        addSubview(videoCardsContainerView)
+//        addSubview(findEventsView)
         
         NSLayoutConstraint.activate([
             customNavigationBarView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -57,10 +63,15 @@ final class MainScreanView: UIView {
             filterView.leftAnchor.constraint(equalTo: leftAnchor),
             filterView.rightAnchor.constraint(equalTo: rightAnchor),
             
-            userFeedView.topAnchor.constraint(equalTo: filterView.bottomAnchor, constant: 16),
-            userFeedView.leftAnchor.constraint(equalTo: leftAnchor),
-            userFeedView.rightAnchor.constraint(equalTo: rightAnchor),
-            userFeedView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
+            videoCardsContainerView.topAnchor.constraint(equalTo: filterView.bottomAnchor, constant: 16),
+            videoCardsContainerView.leftAnchor.constraint(equalTo: leftAnchor),
+            videoCardsContainerView.rightAnchor.constraint(equalTo: rightAnchor),
+            videoCardsContainerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
+            
+//            findEventsView.topAnchor.constraint(equalTo: filterView.bottomAnchor, constant: 16),
+//            findEventsView.leftAnchor.constraint(equalTo: leftAnchor),
+//            findEventsView.rightAnchor.constraint(equalTo: rightAnchor),
+//            findEventsView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
         ])
     }
     
@@ -76,12 +87,10 @@ final class MainScreanView: UIView {
 extension MainScreanView {
     func setFilters(viewModels: [FilterCollectionViewCell.ViewModel]) {
         filterView.set(viewModels: viewModels)
-        print("11111\(viewModels)")
     }
     
-    func setMatchingFilters(viewModel: [MatchingFiltersCollectionViewCell.ViewModel]) {
-        userFeedView.setMatchingFiltersModel(viewModel: viewModel)
-        print("11112\(viewModel)")
+    func setVideoCards(viewModel: [VideoCardView.ViewModel]) {
+        videoCardsContainerView.setVideoCardModel(viewModels: viewModel)
     }
 }
 
@@ -93,6 +102,7 @@ extension MainScreanView: CustomNavigationBarDelegate {
     }
     
     func didTapEventButton() {
+        delegate?.didTapEventButton()
         print("didTapEvent")
     }
     

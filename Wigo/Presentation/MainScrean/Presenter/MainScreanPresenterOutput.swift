@@ -7,5 +7,5 @@
 
 protocol MainScreanPresenterOutput: AnyObject {
     func didFetchFilter(viewModels: [FilterCollectionViewCell.ViewModel])
-    func didFetchMatchingFilter(viewModels: [MatchingFiltersCollectionViewCell.ViewModel])
+    func didFetcVideoCard(viewModel: [VideoCardView.ViewModel])
 }

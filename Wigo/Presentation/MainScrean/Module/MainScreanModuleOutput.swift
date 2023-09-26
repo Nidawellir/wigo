@@ -7,4 +7,6 @@
 
 import Foundation
 
-protocol MainScreanModuleOutput: AnyObject {}
+protocol MainScreanModuleOutput: AnyObject {
+    func openVideoOnboarding()
+}

@@ -7,5 +7,5 @@
 
 protocol MainScreanPresenterInput {
     func fetchFilterViewModls()
-    func fetchMatchingFiltersModels()
+    func fetchVideoCardModels()
 }

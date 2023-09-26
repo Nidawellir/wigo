@@ -2,7 +2,7 @@
 //  ConfirmationCodeInputView.swift
 //  Acty
 //
-//  Created by Евгений Капанов on 16.07.2023.
+//  Created by Aleksey Fedorov on 26.07.2023.
 //
 
 import UIKit

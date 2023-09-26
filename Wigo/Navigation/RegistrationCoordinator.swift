@@ -120,6 +120,8 @@ extension RegistrationCoordinator: TurnGeolocationModuleOutput {
     }
 }
 
+// MARK: - TurnNotificationsModuleOutput
+
 extension RegistrationCoordinator: TurnNotificationsModuleOutput {
     func openOnboarding() {
         completionHandler?(())

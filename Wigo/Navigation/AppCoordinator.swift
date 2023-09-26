@@ -97,7 +97,7 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
             
             self.setOnboardingCompletedUsecase.execute()
             
-            self.coordinateToHome()
+            self.coordinateToRequired()
         })
     }
     
@@ -114,9 +114,5 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
             
             self.decapture(coordinator: mainScreanCoordinator)
         })
-    }
-    
-    private func coordinateToHome() {
-        print("-coordinateToHome()")
     }
 }
