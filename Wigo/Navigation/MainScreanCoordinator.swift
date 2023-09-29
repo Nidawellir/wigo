@@ -12,6 +12,7 @@ final class MainScreanCoordinator: BaseCoordinator<Void, Void> {
     // MARK: - Private properties
     
     private weak var mainScreanModuleInput: MainScreanModuleInput?
+    private weak var filtersModuleInput: FiltersModuleInput?
     
     // MARK: - Override methods
     
@@ -29,7 +30,24 @@ final class MainScreanCoordinator: BaseCoordinator<Void, Void> {
 // MARK: - IntroModuleOutput
 
 extension MainScreanCoordinator: MainScreanModuleOutput {
+    func openFilter() {
+        let filtersViewController: UIViewController
+        
+        (filtersViewController, filtersModuleInput) = FiltersBuilder.build(with: self)
+        
+        navigationController.modalPresentationStyle = .overFullScreen
+        navigationController.present(filtersViewController, animated: false)
+    }
+    
     func openVideoOnboarding() {
         
+    }
+}
+
+// MARK: - FiltersModuleOutput
+
+extension MainScreanCoordinator: FiltersModuleOutput {
+    func closeFilters() {
+        navigationController.dismiss(animated: false)
     }
 }

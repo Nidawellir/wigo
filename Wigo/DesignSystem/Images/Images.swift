@@ -52,6 +52,8 @@ internal enum Images {
     internal static let addEventButton = ImageAsset(name: "mainScrean/addEventButton")
     internal static let avatar = ImageAsset(name: "mainScrean/avatar")
     internal static let background = ImageAsset(name: "mainScrean/background")
+    internal static let checkMarkFilterOff = ImageAsset(name: "mainScrean/checkMarkFilterOff")
+    internal static let checkMarkFilterOn = ImageAsset(name: "mainScrean/checkMarkFilterOn")
     internal static let filterButton = ImageAsset(name: "mainScrean/filterButton")
     internal static let location = ImageAsset(name: "mainScrean/location")
     internal static let locationArrow = ImageAsset(name: "mainScrean/locationArrow")

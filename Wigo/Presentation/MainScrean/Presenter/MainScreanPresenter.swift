@@ -5,6 +5,8 @@
 //  Created by Apple User on 7/25/23.
 //
 
+import Combine
+
 final class MainScreanPresenter {
     
     // MARK: - Public properties
@@ -13,6 +15,7 @@ final class MainScreanPresenter {
     
     // MARK: - Private properties
     
+    private var cancellableSet: Set<AnyCancellable> = []
     private let filterViewModel: [FilterCollectionViewCell.ViewModel] = [
         .init(title: "1gdgdfgdgdg"),
         .init(title: "dsadasda"),
@@ -62,6 +65,15 @@ extension MainScreanPresenter: MainScreanPresenterInput {
     }
     
     func fetchFilterViewModls() {
+        let test: TestGateway = GatewaysFactory.shared.resolve()
+        
+        test.makeTestGateway().sink(receiveCompletion: { completion in
+            print(completion)
+        }, receiveValue: { decodableStruct in
+            print(decodableStruct)
+        })
+        .store(in: &cancellableSet)
+        
         output?.didFetchFilter(viewModels: filterViewModel)
         print("33333\(filterViewModel)")
     }

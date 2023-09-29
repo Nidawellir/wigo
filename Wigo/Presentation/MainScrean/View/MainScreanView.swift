@@ -9,6 +9,7 @@ import UIKit
 
 protocol MainScreanViewDelegate: AnyObject {
     func didTapEventButton()
+    func didTapFilterButton()
 }
 
 final class MainScreanView: UIView {
@@ -107,6 +108,6 @@ extension MainScreanView: CustomNavigationBarDelegate {
     }
     
     func didTapFilterButton() {
-        print("didTapFilter")
+        delegate?.didTapFilterButton()
     }
 }

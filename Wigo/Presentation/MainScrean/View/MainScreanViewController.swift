@@ -60,6 +60,11 @@ extension MainScreanViewController {}
 // MARK: - MainScreanViewDelegate
 
 extension MainScreanViewController: MainScreanViewDelegate {
+    func didTapFilterButton() {
+        output?.openFilter()
+        
+    }
+    
     func didTapEventButton() {
         output?.openVideoOnboarding()
     }

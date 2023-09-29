@@ -17,8 +17,16 @@ final class GatewaysFactory {
     
     // MARK: - Resolve
     
+    func resolve() -> CombinedNetworkProvider {
+        return CombinedNetworkProviderBuilder.build()
+    }
+    
     func resolve() -> UserDefaultsGateway {
         return UserDefaultsGatewayImp.shared
+    }
+    
+    func resolve() -> TestGatewayImp {
+        return TestGatewayImp(combinedNetworkProvider: resolve())
     }
 }
 

@@ -9,4 +9,5 @@ import Foundation
 
 protocol MainScreanModuleOutput: AnyObject {
     func openVideoOnboarding()
+    func openFilter()
 }
