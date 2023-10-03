@@ -15,11 +15,17 @@ final class FiltersPresenter {
     
     private let allSexes: [Sex] = [.man, .woman, .any]
     private var selectedSex: Sex?
+    private let allWho: [Who] = [.any, .group, .oneToOne]
+    private var selectedWho: Who?
 }
 
 // MARK: - FiltersPresenterInput
 
 extension FiltersPresenter: FiltersPresenterInput {
+    func fetchAllWho() {
+        output?.didSuccessWho(allWho: allWho)
+    }
+    
     func fetchAllSexes() {
         output?.didSuccessFetch(allSexes: allSexes)
     }

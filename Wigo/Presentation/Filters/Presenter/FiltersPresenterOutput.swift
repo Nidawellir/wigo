@@ -7,4 +7,5 @@
 
 protocol FiltersPresenterOutput: AnyObject {
     func didSuccessFetch(allSexes: [Sex])
+    func didSuccessWho(allWho: [Who])
 }

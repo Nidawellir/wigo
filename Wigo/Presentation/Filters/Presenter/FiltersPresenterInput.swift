@@ -7,4 +7,5 @@
 
 protocol FiltersPresenterInput {
     func fetchAllSexes()
+    func fetchAllWho()
 }

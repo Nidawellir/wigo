@@ -20,13 +20,17 @@ final class FiltersView: UIView {
     // MARK: - Private properties
     
     private var sexCurrentFilters: [CurrentFilter] = []
+    private var whoCurrentFilters: [CurrentFilter] = []
     
     // MARK: - UI properties
     
     private let shadowView: UIView = .init()
     private let filtersContainerView: UIView = .init()
+    private let howManyLabel: UILabel = .init()
+    private let whoLabel: UILabel = .init()
     private let stackView: UIStackView = .init()
     private let sexStackView: UIStackView = .init()
+    private let whoStackView: UIStackView = .init()
     
     // MARK: - Initialization
     
@@ -49,10 +53,25 @@ final class FiltersView: UIView {
         filtersContainerView.layer.cornerRadius = 12
         filtersContainerView.translatesAutoresizingMaskIntoConstraints = false
         
+        howManyLabel.text = "Сколько"
+        howManyLabel.font = .systemFont(ofSize: 16, weight: .bold)
+        howManyLabel.textColor = Colors.CreateAccount.whiteColor.color
+        howManyLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        whoLabel.text = "Кто"
+        whoLabel.font = .systemFont(ofSize: 16, weight: .bold)
+        whoLabel.textColor = Colors.CreateAccount.whiteColor.color
+        whoLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackView.spacing = 14
+        stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         sexStackView.axis = .vertical
         sexStackView.spacing = 12
+        
+        whoStackView.axis = .vertical
+        whoStackView.spacing = 12
     }
     
     @objc
@@ -66,7 +85,10 @@ final class FiltersView: UIView {
         addSubview(filtersContainerView)
         
         filtersContainerView.addSubview(stackView)
+        filtersContainerView.addSubview(howManyLabel)
+        filtersContainerView.addSubview(whoLabel)
         
+        stackView.addArrangedSubview(whoStackView)
         stackView.addArrangedSubview(sexStackView)
         
         NSLayoutConstraint.activate([
@@ -75,14 +97,20 @@ final class FiltersView: UIView {
             shadowView.rightAnchor.constraint(equalTo: rightAnchor),
             shadowView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            filtersContainerView.topAnchor.constraint(equalTo: shadowView.topAnchor, constant: 50),
+            filtersContainerView.topAnchor.constraint(equalTo: shadowView.topAnchor, constant: 100),
             filtersContainerView.leftAnchor.constraint(equalTo: shadowView.leftAnchor, constant: 16),
             filtersContainerView.rightAnchor.constraint(equalTo: shadowView.rightAnchor, constant: -16),
             
-            stackView.topAnchor.constraint(equalTo: filtersContainerView.topAnchor),
-            stackView.leftAnchor.constraint(equalTo: filtersContainerView.leftAnchor),
-            stackView.rightAnchor.constraint(equalTo: filtersContainerView.rightAnchor),
-            stackView.bottomAnchor.constraint(equalTo: filtersContainerView.bottomAnchor),
+            stackView.topAnchor.constraint(equalTo: filtersContainerView.topAnchor, constant: 88),
+            stackView.leftAnchor.constraint(equalTo: filtersContainerView.leftAnchor, constant: 48),
+            stackView.rightAnchor.constraint(equalTo: filtersContainerView.rightAnchor, constant: -24),
+            stackView.bottomAnchor.constraint(equalTo: filtersContainerView.bottomAnchor, constant: -44),
+            
+            howManyLabel.leftAnchor.constraint(equalTo: whoStackView.leftAnchor),
+            howManyLabel.bottomAnchor.constraint(equalTo: whoStackView.topAnchor, constant: -24),
+            
+            whoLabel.leftAnchor.constraint(equalTo: sexStackView.leftAnchor),
+            whoLabel.bottomAnchor.constraint(equalTo: sexStackView.topAnchor, constant: -24)
         ])
     }
     
@@ -110,9 +138,30 @@ extension FiltersView {
         }
     }
     
+    func set(allWho: [Who]) {
+        whoCurrentFilters.removeAll()
+        whoStackView.removeArrangedSubviews()
+        
+        for who in allWho {
+            let currentFilter = CurrentFilter(text: who.title)
+            
+            whoCurrentFilters.append(currentFilter)
+            whoStackView.addArrangedSubview(currentFilter)
+            
+            currentFilter.addTarget(self, action: #selector(didTapWhoFilter), for: .touchUpInside)
+        }
+    }
+    
     @objc
     private func didTapCurrentFilter(_ sender: CurrentFilter) {
         sexCurrentFilters.forEach { $0.isOn = false }
+        
+        sender.isOn = true
+    }
+    
+    @objc
+    private func didTapWhoFilter(_ sender: CurrentFilter) {
+        whoCurrentFilters.forEach { $0.isOn = false }
         
         sender.isOn = true
     }

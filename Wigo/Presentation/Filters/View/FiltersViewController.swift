@@ -45,6 +45,7 @@ final class FiltersViewController: UIViewController {
         super.viewDidLoad()
         
         presenter.fetchAllSexes()
+        presenter.fetchAllWho()
     }
 }
 
@@ -67,6 +68,10 @@ extension FiltersViewController: FiltersViewDelegate {
 // MARK: - FiltersPresenterOutput
 
 extension FiltersViewController: FiltersPresenterOutput {
+    func didSuccessWho(allWho: [Who]) {
+        filtersView.set(allWho: allWho)
+    }
+    
     func didSuccessFetch(allSexes: [Sex]) {
         filtersView.set(allSexes: allSexes)
     }

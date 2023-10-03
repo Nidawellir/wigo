@@ -17,11 +17,11 @@ extension Sex {
     var title: String {
         switch self {
         case .man:
-            return "Мужчина"
+            return "Любые"
         case .woman:
             return "Женщина"
         case .any:
-            return "Любые"
+            return "Мужчина"
         }
     }
 }
