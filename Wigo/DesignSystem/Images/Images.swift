@@ -23,9 +23,11 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Images {
   internal enum CreateAccount {
+    internal static let apple = ImageAsset(name: "createAccount/apple")
     internal static let backArrow = ImageAsset(name: "createAccount/backArrow")
     internal static let geolocation = ImageAsset(name: "createAccount/geolocation")
     internal static let grayCross = ImageAsset(name: "createAccount/grayCross")
+    internal static let logo = ImageAsset(name: "createAccount/logo")
     internal static let notification = ImageAsset(name: "createAccount/notification")
     internal static let whiteCross = ImageAsset(name: "createAccount/whiteCross")
   }
@@ -65,6 +67,11 @@ internal enum Images {
     internal static let four = ImageAsset(name: "videoOnboarding/four")
     internal static let second = ImageAsset(name: "videoOnboarding/second")
     internal static let third = ImageAsset(name: "videoOnboarding/third")
+  }
+  internal enum VideoRecord {
+    internal static let cross = ImageAsset(name: "videoRecord/cross")
+    internal static let record = ImageAsset(name: "videoRecord/record")
+    internal static let spiner = ImageAsset(name: "videoRecord/spiner")
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

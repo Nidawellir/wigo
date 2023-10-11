@@ -56,6 +56,18 @@ final class UsecasesFactory {
             userDefaultsGateway: gatewaysFactory.resolve()
         )
     }
+    
+    func resolve() -> RegistrationUsecase {
+        return RegistrationUsecase(authenticationGateway: gatewaysFactory.resolve())
+    }
+    
+    func resolve() -> SetInOnboardingVideoRecordingCompletedUsecese {
+        return SetInOnboardingVideoRecordingCompletedUsecese(userDefaultsGateway: gatewaysFactory.resolve())
+    }
+    
+    func resolve() -> GetInOnboardingVideoRecordingCompletedUsecese {
+        return GetInOnboardingVideoRecordingCompletedUsecese(userDefaultsGateway: gatewaysFactory.resolve())
+    }
 }
 
 // MARK: - Inject dependency

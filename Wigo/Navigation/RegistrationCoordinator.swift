@@ -11,8 +11,8 @@ final class RegistrationCoordinator: BaseCoordinator<Void, Void> {
     
     // MARK: - Private properties
     
+    private weak var appleIDSignInModuleInput: AppleIDSignInModuleInput?
     private weak var createAccountModuleInput: CreateAccountModuleInput?
-    private weak var smsCodeModuleInput: SMSCodeModuleInput?
     private weak var yourNameModuleInput: YourNameModuleInput?
     private weak var yourBirtdayModuleInput: YourBirthdayModuleInput?
     private weak var genderModuleInput: GenderModuleInput?
@@ -24,39 +24,32 @@ final class RegistrationCoordinator: BaseCoordinator<Void, Void> {
     override func start(with input: Void, completionHandler: @escaping (()) -> Void) {
         super.start(with: input, completionHandler: completionHandler)
         
+        let appleIDSignInViewController: UIViewController
+        
+        (appleIDSignInViewController, appleIDSignInModuleInput) = AppleIDSignInBuilder.build(with: self)
+        
+        navigationController.viewControllers = [appleIDSignInViewController]
+    }
+}
+
+extension RegistrationCoordinator: AppleIDSignInModuleOutput {
+    func openCreateAccaunt() {
         let createAccountViewController: UIViewController
         
         (createAccountViewController, createAccountModuleInput) = CreateAccountBuilder.build(with: self)
-        
-        navigationController.viewControllers = [createAccountViewController]
+        navigationController.pushViewController(createAccountViewController, animated: true)
     }
 }
 
 // MARK: - CreateAccountModuleOutput
 
 extension RegistrationCoordinator: CreateAccountModuleOutput {
-    func openSMSCode() {
-        let smsCodeViewController: UIViewController
-        
-        (smsCodeViewController, smsCodeModuleInput) = SMSCodeBuilder.build(with: self)
-                
-        navigationController.pushViewController(smsCodeViewController, animated: true)
-    }
-}
-
-// MARK: - SMSCodeModuleOutput
-
-extension RegistrationCoordinator: SMSCodeModuleOutput {
     func openYourName() {
         let yourNameViewController: UIViewController
         
         (yourNameViewController, yourNameModuleInput) = YourNameBuilder.build(with: self)
                 
         navigationController.pushViewController(yourNameViewController, animated: true)
-    }
-    
-    func closeSMSCode() {
-        navigationController.popViewController(animated: true)
     }
 }
 

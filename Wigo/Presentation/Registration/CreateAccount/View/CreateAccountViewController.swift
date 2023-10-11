@@ -63,7 +63,7 @@ extension CreateAccountViewController: CreateAccountViewDelegate {
 
 extension CreateAccountViewController: CreateAccountPresenterOutput {
     func didSuccessFetchCreateAccount() {
-        output?.openSMSCode()
+        output?.openYourName()
     }
     
     func didFailureFetchCreateAccount() {

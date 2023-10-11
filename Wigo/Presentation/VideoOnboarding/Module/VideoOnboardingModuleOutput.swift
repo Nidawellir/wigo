@@ -9,4 +9,5 @@ import Foundation
 
 protocol VideoOnboardingModuleOutput: AnyObject {
     func skipVideoOnboarding()
+    func closeVideoOnboarding()
 }

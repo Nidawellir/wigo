@@ -6,5 +6,5 @@
 //
 
 protocol CreateAccountModuleOutput: AnyObject {
-    func openSMSCode()
+    func openYourName()
 }

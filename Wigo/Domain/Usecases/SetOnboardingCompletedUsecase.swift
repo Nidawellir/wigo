@@ -10,7 +10,7 @@ final class SetOnboardingCompletedUsecase {
     // MARK: - Private properties
     
     private let userDefaultsGateway: UserDefaultsGateway
-    private let isOnboardingCompletedKey: String = "isRegistrationCompletedKey"
+    private let isOnboardingCompletedKey: String = "isOnboardingCompletedKey"
     
     // MARK: - Initialization
     

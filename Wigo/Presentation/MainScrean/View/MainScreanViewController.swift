@@ -66,7 +66,7 @@ extension MainScreanViewController: MainScreanViewDelegate {
     }
     
     func didTapEventButton() {
-        output?.openVideoOnboarding()
+        output?.openVideoFlow()
     }
 }
 

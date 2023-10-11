@@ -22,13 +22,19 @@ final class VideoOnboardingCoordinator: BaseCoordinator<Void, Void> {
         
         (onboarding, videoOnboardingModuleInput) = VideoOnboardingBuilder.build(with: self)
         
-        navigationController.viewControllers = [onboarding]
+        navigationController.pushViewController(onboarding, animated: false)
     }
 }
 // MARK: - VideoOnboardingModuleOutput
 
 extension VideoOnboardingCoordinator: VideoOnboardingModuleOutput {
+    func closeVideoOnboarding() {
+        navigationController.popViewController(animated: false)
+        completionHandler?(())
+    }
+    
     func skipVideoOnboarding() {
+        navigationController.popViewController(animated: false)
         completionHandler?(())
     }
 }

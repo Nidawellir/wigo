@@ -9,7 +9,8 @@ import UIKit
 
 enum CreateAccountBuilder {
     static func build(with output: CreateAccountModuleOutput? = nil) -> (UIViewController, CreateAccountModuleInput) {
-        let presenter = CreateAccountPresenter()
+        let usecasesFactory = UsecasesFactory.shared
+        let presenter = CreateAccountPresenter(registrationUsecase: usecasesFactory.resolve())
         let viewController = CreateAccountViewController(presenter: presenter)
         
         presenter.output = viewController

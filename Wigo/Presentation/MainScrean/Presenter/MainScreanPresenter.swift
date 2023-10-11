@@ -51,9 +51,9 @@ final class MainScreanPresenter {
     ]
     
     private let videoCardModels: [VideoCardView.ViewModel] = [
-        .init(name: "Zahar", description: "Балуется пальчиком в попке", location: "У себя дома", timeToUser: "1", videoFileName: "wild", videoFormatName: "mp4", matchingFilters: ["sdadsada", "sadaddsd", "dadaad", "dsadas"]),
-        .init(name: "Olegsey", description: "Сидит на бутылке", location: "За спиной у матери", timeToUser: "5", videoFileName: "wild", videoFormatName: "mp4", matchingFilters: ["sdadsada", "sadaddsd", "dadaad", "dsadas"]),
-        .init(name: "Daria", description: "Смотрит как Олегсей сидит на бутылке", location: "За спиной у Олегсея", timeToUser: "5", videoFileName: "wild", videoFormatName: "mp4", matchingFilters: ["sdadsada", "sadaddsd", "dadaad", "dsadas"]),
+        .init(name: "Zahar", description: "Привет", location: "У себя дома", timeToUser: "1 мин", videoFileName: "wild", videoFormatName: "mp4", matchingFilters: ["sdadsada", "sadaddsd", "dadaad", "dsadas"]),
+        .init(name: "Olegsey", description: "Привет", location: "За спиной", timeToUser: "5 мин", videoFileName: "wild", videoFormatName: "mp4", matchingFilters: ["sdadsada", "sadaddsd", "dadaad", "dsadas"]),
+        .init(name: "Daria", description: "Привет, меня зовут даша, приглашаю тебя на свою вечеринку", location: "Дома", timeToUser: "5 мин", videoFileName: "wild", videoFormatName: "mp4", matchingFilters: ["sdadsada", "sadaddsd", "dadaad", "dsadas"]),
     ]
 }
 
@@ -65,14 +65,14 @@ extension MainScreanPresenter: MainScreanPresenterInput {
     }
     
     func fetchFilterViewModls() {
-        let test: TestGateway = GatewaysFactory.shared.resolve()
-        
-        test.makeTestGateway().sink(receiveCompletion: { completion in
-            print(completion)
-        }, receiveValue: { decodableStruct in
-            print(decodableStruct)
-        })
-        .store(in: &cancellableSet)
+//        let test: TestGateway = GatewaysFactory.shared.resolve()
+//        
+//        test.makeTestGateway().sink(receiveCompletion: { completion in
+//            print(completion)
+//        }, receiveValue: { decodableStruct in
+//            print(decodableStruct)
+//        })
+//        .store(in: &cancellableSet)
         
         output?.didFetchFilter(viewModels: filterViewModel)
         print("33333\(filterViewModel)")

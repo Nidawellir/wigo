@@ -76,6 +76,6 @@ extension VideoOnboardingViewController: VideoOnboardingPresenterOutput {
     }
     
     func closeVideoOnboarding() {
-        print("-closeVideoOnboarding()")
+        output?.closeVideoOnboarding()
     }
 }

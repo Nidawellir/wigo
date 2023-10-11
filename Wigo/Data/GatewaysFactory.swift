@@ -25,8 +25,8 @@ final class GatewaysFactory {
         return UserDefaultsGatewayImp.shared
     }
     
-    func resolve() -> TestGatewayImp {
-        return TestGatewayImp(combinedNetworkProvider: resolve())
+    func resolve() -> AuthenticationGateway {
+        return AuthenticationGatewayImp(combinedNetworkProvider: resolve())
     }
 }
 

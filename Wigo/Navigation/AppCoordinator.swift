@@ -22,25 +22,18 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
         super.start(with: input, completionHandler: completionHandler)
         
         coordinateToRequired()
+//        coordinateToRegistration()
     }
     
     private func coordinateToRequired() {
-        if getIsIntroCompletedUsecase.execute() == true {
-            coordinateToRegistration()
-        } else {
+        if !(getIsIntroCompletedUsecase.execute() ?? false) {
             coordinateToIntro()
-        }
-        
-        if getInRegistrationCompletedUsecese.execute() == true {
-            coordinateToOnboarding()
-        } else {
+        } else if !(getInRegistrationCompletedUsecese.execute() ?? false) {
             coordinateToRegistration()
-        }
-        
-        if getInOnboardingCompletedUsecase.execute() == true {
-            coordinateToMainScrean()
-        } else {
+        } else if !(getInOnboardingCompletedUsecase.execute() ?? false) {
             coordinateToOnboarding()
+        } else {
+            coordinateToMainScrean()
         }
     }
     
@@ -113,6 +106,21 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
             else { return }
             
             self.decapture(coordinator: mainScreanCoordinator)
+        })
+    }
+    
+    private func coordinateToVideoOnboarding() {
+        let videoOnboardingCoordinator = OnboardingCoordinator(navigationController: navigationController)
+        
+        capture(coordinator: videoOnboardingCoordinator)
+        
+        videoOnboardingCoordinator.start(with: (), completionHandler: { [weak self, weak videoOnboardingCoordinator] _ in
+            guard
+                let self = self,
+                let videoOnboardingCoo0rdinator = videoOnboardingCoordinator
+            else { return }
+            
+            self.decapture(coordinator: videoOnboardingCoo0rdinator)
         })
     }
 }

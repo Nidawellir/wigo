@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "Wigo_logo_hor.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}
