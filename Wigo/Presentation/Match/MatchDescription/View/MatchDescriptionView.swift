@@ -61,6 +61,7 @@ final class MatchDescriptionView: UIView {
         thumbnailView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapThumbnailView)))
         thumbnailView.translatesAutoresizingMaskIntoConstraints = false
         
+        thumbnailImageView.contentMode = .scaleAspectFill
         thumbnailImageView.backgroundColor = .black
         thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -118,4 +119,8 @@ final class MatchDescriptionView: UIView {
 
 // MARK: - Public methods
 
-extension MatchDescriptionView {}
+extension MatchDescriptionView {
+    func set(thumbnailImage: UIImage) {
+        thumbnailImageView.image = thumbnailImage
+    }
+}

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MatchCoordinator: BaseCoordinator<Void, Void> {
+final class MatchCoordinator: BaseCoordinator<URL, Void> {
     
     // MARK: - Private properties
     
@@ -15,12 +15,18 @@ final class MatchCoordinator: BaseCoordinator<Void, Void> {
     
     // MARK: - Override methods
     
-    override func start(with input: Void, completionHandler: @escaping (()) -> Void) {
+    override func start(with input: URL, completionHandler: @escaping (()) -> Void) {
         super.start(with: input, completionHandler: completionHandler)
         
+        pushMatchDescriptionModule(with: input)
+    }
+    
+    private func pushMatchDescriptionModule(with videoURL: URL) {
         let matchDescriptionViewController: UIViewController
         
         (matchDescriptionViewController, matchDescriptionModuleInput) = MatchDescriptionBuilder.build(with: self)
+        
+        matchDescriptionModuleInput?.set(videoURL: videoURL)
         
         navigationController.pushViewController(matchDescriptionViewController, animated: true)
     }

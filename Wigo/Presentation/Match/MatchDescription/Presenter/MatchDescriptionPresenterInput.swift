@@ -5,4 +5,8 @@
 //  Created by Apple User on 7/25/23.
 //
 
-protocol MatchDescriptionPresenterInput {}
+import Foundation
+
+protocol MatchDescriptionPresenterInput {
+    func set(videoURL: URL)
+}

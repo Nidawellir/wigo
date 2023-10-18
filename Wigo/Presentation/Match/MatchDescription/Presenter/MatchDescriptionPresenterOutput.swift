@@ -5,4 +5,8 @@
 //  Created by Apple User on 7/25/23.
 //
 
-protocol MatchDescriptionPresenterOutput: AnyObject {}
+import UIKit
+
+protocol MatchDescriptionPresenterOutput: AnyObject {
+    func didFetch(thumbnailImage: UIImage)
+}

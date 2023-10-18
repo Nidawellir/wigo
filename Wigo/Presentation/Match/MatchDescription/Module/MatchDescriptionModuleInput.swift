@@ -7,4 +7,6 @@
 
 import Foundation
 
-protocol MatchDescriptionModuleInput: AnyObject {}
+protocol MatchDescriptionModuleInput: AnyObject {
+    func set(videoURL: URL)
+}

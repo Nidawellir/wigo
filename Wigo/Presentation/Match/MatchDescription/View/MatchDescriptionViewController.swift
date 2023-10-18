@@ -45,11 +45,19 @@ final class MatchDescriptionViewController: UIViewController {
 
 // MARK: - MatchDescriptionModuleInput
 
-extension MatchDescriptionViewController: MatchDescriptionModuleInput {}
+extension MatchDescriptionViewController: MatchDescriptionModuleInput {
+    func set(videoURL: URL) {
+        presenter.set(videoURL: videoURL)
+    }
+}
 
 // MARK: - MatchDescriptionPresenterOutput
 
-extension MatchDescriptionViewController: MatchDescriptionPresenterOutput {}
+extension MatchDescriptionViewController: MatchDescriptionPresenterOutput {
+    func didFetch(thumbnailImage: UIImage) {
+        matchDescriptionView.set(thumbnailImage: thumbnailImage)
+    }
+}
 
 // MARK: - MatchDescriptionViewDelegate
 
