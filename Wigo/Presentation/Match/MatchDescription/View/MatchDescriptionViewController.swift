@@ -37,6 +37,8 @@ final class MatchDescriptionViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
+        matchDescriptionView.delegate = self
+        
         view = matchDescriptionView
     }
 }
@@ -45,10 +47,14 @@ final class MatchDescriptionViewController: UIViewController {
 
 extension MatchDescriptionViewController: MatchDescriptionModuleInput {}
 
-// MARK: - Public methods
-
-extension MatchDescriptionViewController {}
-
 // MARK: - MatchDescriptionPresenterOutput
 
 extension MatchDescriptionViewController: MatchDescriptionPresenterOutput {}
+
+// MARK: - MatchDescriptionViewDelegate
+
+extension MatchDescriptionViewController: MatchDescriptionViewDelegate {
+    func didTapBackButton() {
+        output?.closeMatchDescriptionMatch()
+    }
+}

@@ -28,4 +28,8 @@ final class MatchCoordinator: BaseCoordinator<Void, Void> {
 
 // MARK: - MatchDescriptionModuleOutput
 
-extension MatchCoordinator: MatchDescriptionModuleOutput {}
+extension MatchCoordinator: MatchDescriptionModuleOutput {
+    func closeMatchDescriptionMatch() {
+        print("-closeMatchDescriptionMatch()")
+    }
+}

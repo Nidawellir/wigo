@@ -43,6 +43,9 @@ internal enum Images {
     internal static let mute = ImageAsset(name: "MainScrean/mute")
     internal static let setting = ImageAsset(name: "MainScrean/setting")
   }
+  internal enum Match {
+    internal static let backButton = ImageAsset(name: "Match/backButton")
+  }
   internal enum CreateAccountOnboarding {
     internal static let eight = ImageAsset(name: "createAccountOnboarding/eight")
     internal static let first = ImageAsset(name: "createAccountOnboarding/first")
