@@ -21,8 +21,9 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
     public override func start(with input: Void, completionHandler: @escaping (()) -> Void) {
         super.start(with: input, completionHandler: completionHandler)
         
-        coordinateToRequired()
+//        coordinateToRequired()
 //        coordinateToRegistration()
+        coordinateToMatch()
     }
     
     private func coordinateToRequired() {
@@ -121,6 +122,18 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
             else { return }
             
             self.decapture(coordinator: videoOnboardingCoo0rdinator)
+        })
+    }
+    
+    private func coordinateToMatch() {
+        let matchCoordinator = MatchCoordinator(navigationController: navigationController)
+        
+        capture(coordinator: matchCoordinator)
+        
+        matchCoordinator.start(with: (), completionHandler: { [weak self, weak matchCoordinator] _ in
+            guard let self = self, let matchCoordinator = matchCoordinator else { return }
+            
+            self.decapture(coordinator: matchCoordinator)
         })
     }
 }

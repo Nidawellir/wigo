@@ -23,13 +23,25 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Images {
   internal enum CreateAccount {
-    internal static let apple = ImageAsset(name: "createAccount/apple")
-    internal static let backArrow = ImageAsset(name: "createAccount/backArrow")
-    internal static let geolocation = ImageAsset(name: "createAccount/geolocation")
-    internal static let grayCross = ImageAsset(name: "createAccount/grayCross")
-    internal static let logo = ImageAsset(name: "createAccount/logo")
-    internal static let notification = ImageAsset(name: "createAccount/notification")
-    internal static let whiteCross = ImageAsset(name: "createAccount/whiteCross")
+    internal static let apple = ImageAsset(name: "CreateAccount/apple")
+    internal static let backArrow = ImageAsset(name: "CreateAccount/backArrow")
+    internal static let geolocation = ImageAsset(name: "CreateAccount/geolocation")
+    internal static let grayCross = ImageAsset(name: "CreateAccount/grayCross")
+    internal static let logo = ImageAsset(name: "CreateAccount/logo")
+    internal static let notification = ImageAsset(name: "CreateAccount/notification")
+    internal static let whiteCross = ImageAsset(name: "CreateAccount/whiteCross")
+  }
+  internal enum MainScrean {
+    internal static let addEventButton = ImageAsset(name: "MainScrean/addEventButton")
+    internal static let avatar = ImageAsset(name: "MainScrean/avatar")
+    internal static let background = ImageAsset(name: "MainScrean/background")
+    internal static let checkMarkFilterOff = ImageAsset(name: "MainScrean/checkMarkFilterOff")
+    internal static let checkMarkFilterOn = ImageAsset(name: "MainScrean/checkMarkFilterOn")
+    internal static let filterButton = ImageAsset(name: "MainScrean/filterButton")
+    internal static let location = ImageAsset(name: "MainScrean/location")
+    internal static let locationArrow = ImageAsset(name: "MainScrean/locationArrow")
+    internal static let mute = ImageAsset(name: "MainScrean/mute")
+    internal static let setting = ImageAsset(name: "MainScrean/setting")
   }
   internal enum CreateAccountOnboarding {
     internal static let eight = ImageAsset(name: "createAccountOnboarding/eight")
@@ -49,18 +61,6 @@ internal enum Images {
     internal static let logo = ImageAsset(name: "intro/logo")
     internal static let secondIntro = ImageAsset(name: "intro/secondIntro")
     internal static let thirdIntro = ImageAsset(name: "intro/thirdIntro")
-  }
-  internal enum MainScrean {
-    internal static let addEventButton = ImageAsset(name: "mainScrean/addEventButton")
-    internal static let avatar = ImageAsset(name: "mainScrean/avatar")
-    internal static let background = ImageAsset(name: "mainScrean/background")
-    internal static let checkMarkFilterOff = ImageAsset(name: "mainScrean/checkMarkFilterOff")
-    internal static let checkMarkFilterOn = ImageAsset(name: "mainScrean/checkMarkFilterOn")
-    internal static let filterButton = ImageAsset(name: "mainScrean/filterButton")
-    internal static let location = ImageAsset(name: "mainScrean/location")
-    internal static let locationArrow = ImageAsset(name: "mainScrean/locationArrow")
-    internal static let mute = ImageAsset(name: "mainScrean/mute")
-    internal static let setting = ImageAsset(name: "mainScrean/setting")
   }
   internal enum VideoOnboarding {
     internal static let first = ImageAsset(name: "videoOnboarding/first")
