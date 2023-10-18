@@ -25,6 +25,9 @@ final class MatchDescriptionView: UIView {
         static let thumbnailViewLeadingSpace: CGFloat = 16.0
         static let thumbnailViewSize: CGSize = .init(width: 100, height: 160)
         static let playButtonSize: CGSize = .init(width: 28.0, height: 28.0)
+        static let textViewMaxCharacters: Int = 140
+        static let textLeadingSpace: CGFloat = 16.0
+        static let textTrailingSpace: CGFloat = 20.0
     }
     
     // MARK: - Public properties
@@ -39,6 +42,9 @@ final class MatchDescriptionView: UIView {
     private let thumbnailView: UIView = .init()
     private let thumbnailImageView: UIImageView = .init()
     private let playButton: UIButton = .init()
+    private let textView: UITextView = .init()
+    private let placeholderLabel: UILabel = .init()
+    private let charactersLabel: UILabel = .init()
     
     // MARK: - Initialization
     
@@ -47,6 +53,8 @@ final class MatchDescriptionView: UIView {
         
         configureViews()
         configureLayouts()
+        hideKeyboardIfTap()
+        updateCharactersLabelText()
     }
     
     private func configureViews() {
@@ -68,6 +76,25 @@ final class MatchDescriptionView: UIView {
         playButton.setImage(Images.Match.playButton.image, for: .normal)
         playButton.addTarget(self, action: #selector(didTapThumbnailView), for: .touchUpInside)
         playButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        textView.backgroundColor = Colors.CreateAccount.darkBackground.color
+        textView.font = .systemFont(ofSize: 14.0, weight: .medium)
+        textView.textColor = .white
+        textView.delegate = self
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        placeholderLabel.text = "Write here your event description..."
+        placeholderLabel.font = .systemFont(ofSize: 14.0, weight: .regular)
+        placeholderLabel.textColor = .white
+        placeholderLabel.numberOfLines = 0
+        placeholderLabel.isUserInteractionEnabled = false
+        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        charactersLabel.font = .systemFont(ofSize: 10, weight: .bold)
+        charactersLabel.textColor = .white
+        charactersLabel.textAlignment = .right
+        charactersLabel.alpha = 0.4
+        charactersLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
     @objc
@@ -80,12 +107,20 @@ final class MatchDescriptionView: UIView {
         delegate?.didTapThumbnailView()
     }
     
+    private func updateCharactersLabelText() {
+        charactersLabel.text = "\(textView.text.count)/\(Constants.textViewMaxCharacters)"
+    }
+    
     private func configureLayouts() {
         addSubview(backButton)
         addSubview(thumbnailView)
         
         thumbnailView.addSubview(thumbnailImageView)
         thumbnailView.addSubview(playButton)
+        
+        addSubview(textView)
+        addSubview(placeholderLabel)
+        addSubview(charactersLabel)
         
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Constants.backButtonTopSpace),
@@ -107,7 +142,29 @@ final class MatchDescriptionView: UIView {
             playButton.centerYAnchor.constraint(equalTo: thumbnailView.centerYAnchor),
             playButton.widthAnchor.constraint(equalToConstant: Constants.playButtonSize.width),
             playButton.heightAnchor.constraint(equalToConstant: Constants.playButtonSize.height),
+            
+            textView.topAnchor.constraint(equalTo: thumbnailView.topAnchor),
+            textView.leadingAnchor.constraint(equalTo: thumbnailView.trailingAnchor, constant: Constants.textLeadingSpace),
+            textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.textTrailingSpace),
+            
+            placeholderLabel.topAnchor.constraint(equalTo: textView.topAnchor),
+            placeholderLabel.leadingAnchor.constraint(equalTo: textView.leadingAnchor),
+            placeholderLabel.trailingAnchor.constraint(equalTo: textView.trailingAnchor),
+            
+            charactersLabel.topAnchor.constraint(equalTo: textView.bottomAnchor),
+            charactersLabel.leadingAnchor.constraint(equalTo: thumbnailView.trailingAnchor, constant: Constants.textLeadingSpace),
+            charactersLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.textTrailingSpace),
+            charactersLabel.bottomAnchor.constraint(equalTo: thumbnailView.bottomAnchor)
         ])
+    }
+    
+    private func hideKeyboardIfTap() {
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+    }
+    
+    @objc
+    private func dismissKeyboard() {
+        endEditing(true)
     }
     
     required init?(coder: NSCoder) {
@@ -122,5 +179,26 @@ final class MatchDescriptionView: UIView {
 extension MatchDescriptionView {
     func set(thumbnailImage: UIImage) {
         thumbnailImageView.image = thumbnailImage
+    }
+}
+
+// MARK: - UITextViewDelegate
+
+extension MatchDescriptionView: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        return newText.count <= Constants.textViewMaxCharacters
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        updateCharactersLabelText()
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        placeholderLabel.isHidden = !textView.text.isEmpty
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        placeholderLabel.isHidden = true
     }
 }
