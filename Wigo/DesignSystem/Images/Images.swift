@@ -45,6 +45,7 @@ internal enum Images {
   }
   internal enum Match {
     internal static let backButton = ImageAsset(name: "Match/backButton")
+    internal static let playButton = ImageAsset(name: "Match/playButton")
   }
   internal enum CreateAccountOnboarding {
     internal static let eight = ImageAsset(name: "createAccountOnboarding/eight")

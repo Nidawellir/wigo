@@ -57,4 +57,9 @@ extension MatchDescriptionViewController: MatchDescriptionViewDelegate {
     func didTapBackButton() {
         output?.closeMatchDescriptionMatch()
     }
+    
+    func didTapThumbnailView() {
+        print("-didTapThumbnailView()")
+//        output?.closeMatchDescriptionMatch()
+    }
 }
