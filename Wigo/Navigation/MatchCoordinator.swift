@@ -12,6 +12,7 @@ final class MatchCoordinator: BaseCoordinator<URL, Void> {
     // MARK: - Private properties
     
     private weak var matchDescriptionModuleInput: MatchDescriptionModuleInput?
+    private weak var matchPreviewModuleInput: MatchPreviewModuleInput?
     
     // MARK: - Override methods
     
@@ -40,6 +41,24 @@ extension MatchCoordinator: MatchDescriptionModuleOutput {
     }
     
     func openPreviewVideo(with videoURL: URL) {
-        print(videoURL)
+        pushMatchPreviewModule(with: videoURL)
+    }
+    
+    private func pushMatchPreviewModule(with videoURL: URL) {
+        let matchPreviewViewController: UIViewController
+        
+        (matchPreviewViewController, matchPreviewModuleInput) = MatchPreviewBuilder.build(with: self)
+        
+        matchPreviewModuleInput?.set(videoURL: videoURL)
+        
+        navigationController.pushViewController(matchPreviewViewController, animated: true)
+    }
+}
+
+// MARK: - MatchPreviewModuleOutput
+
+extension MatchCoordinator: MatchPreviewModuleOutput {
+    func closeMatchPreviewMatch() {
+        navigationController.popViewController(animated: true)
     }
 }
