@@ -38,4 +38,8 @@ extension MatchCoordinator: MatchDescriptionModuleOutput {
     func closeMatchDescriptionMatch() {
         print("-closeMatchDescriptionMatch()")
     }
+    
+    func openPreviewVideo(with videoURL: URL) {
+        print(videoURL)
+    }
 }

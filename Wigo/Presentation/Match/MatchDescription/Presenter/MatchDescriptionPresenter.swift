@@ -14,18 +14,19 @@ final class MatchDescriptionPresenter {
     
     weak var output: MatchDescriptionPresenterOutput?
     
-    // MARK: - Private properties
-    
+    var videoURL: URL?
 }
 
 // MARK: - MatchDescriptionPresenterInput
 
 extension MatchDescriptionPresenter: MatchDescriptionPresenterInput {
     func set(videoURL: URL) {
-        makeThumbnailImage(from: videoURL)
+        self.videoURL = videoURL
     }
     
-    private func makeThumbnailImage(from videoURL: URL) {
+    func fetchThumbnailImage() {
+        guard let videoURL = videoURL else { return }
+        
         let asset = AVAsset(url: videoURL)
         let assetImageGenerator = AVAssetImageGenerator(asset: asset)
         let startTime = CMTime(value: 0, timescale: 1)

@@ -41,6 +41,12 @@ final class MatchDescriptionViewController: UIViewController {
         
         view = matchDescriptionView
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        presenter.fetchThumbnailImage()
+    }
 }
 
 // MARK: - MatchDescriptionModuleInput
@@ -67,7 +73,8 @@ extension MatchDescriptionViewController: MatchDescriptionViewDelegate {
     }
     
     func didTapThumbnailView() {
-        print("-didTapThumbnailView()")
-//        output?.closeMatchDescriptionMatch()
+        guard let videoURL = presenter.videoURL else { return }
+        
+        output?.openPreviewVideo(with: videoURL)
     }
 }

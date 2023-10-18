@@ -8,5 +8,8 @@
 import Foundation
 
 protocol MatchDescriptionPresenterInput {
+    var videoURL: URL? { get }
+    
     func set(videoURL: URL)
+    func fetchThumbnailImage()
 }
