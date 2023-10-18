@@ -23,9 +23,9 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
     public override func start(with input: Void, completionHandler: @escaping (()) -> Void) {
         super.start(with: input, completionHandler: completionHandler)
         
-//        coordinateToRequired()
+        coordinateToRequired()
 //        coordinateToRegistration()
-        coordinateToMatch()
+//        coordinateToMatch()
     }
     
     private func coordinateToRequired() {
