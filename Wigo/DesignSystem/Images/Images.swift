@@ -22,6 +22,10 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Images {
+  internal enum Match {
+    internal static let backButton = ImageAsset(name: "Match/backButton")
+    internal static let playButton = ImageAsset(name: "Match/playButton")
+  }
   internal enum CreateAccount {
     internal static let apple = ImageAsset(name: "createAccount/apple")
     internal static let backArrow = ImageAsset(name: "createAccount/backArrow")

@@ -5,6 +5,8 @@
 //  Created by Aleksey Fedorov on 16.08.2022.
 //
 
+import Foundation
+
 public final class AppCoordinator: BaseCoordinator<Void, Void> {
     
     // MARK: - Usecases
@@ -23,6 +25,7 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
         
         coordinateToRequired()
 //        coordinateToRegistration()
+//        coordinateToMatch()
     }
     
     private func coordinateToRequired() {
@@ -122,5 +125,22 @@ public final class AppCoordinator: BaseCoordinator<Void, Void> {
             
             self.decapture(coordinator: videoOnboardingCoo0rdinator)
         })
+    }
+    
+    private func coordinateToMatch() {
+        let matchCoordinator = MatchCoordinator(navigationController: navigationController)
+        
+        capture(coordinator: matchCoordinator)
+        
+        matchCoordinator.start(with: makeMockVideoURL(), completionHandler: { [weak self, weak matchCoordinator] _ in
+            guard let self = self, let matchCoordinator = matchCoordinator else { return }
+            
+            self.decapture(coordinator: matchCoordinator)
+        })
+    }
+    
+    private func makeMockVideoURL() -> URL {
+        guard let mockVideoPath = Bundle.main.path(forResource: "SexyGirlDance", ofType:"MP4") else { fatalError() }
+        return URL(fileURLWithPath: mockVideoPath)
     }
 }
