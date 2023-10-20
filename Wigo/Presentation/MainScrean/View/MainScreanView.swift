@@ -64,7 +64,7 @@ final class MainScreanView: UIView {
             filterView.leftAnchor.constraint(equalTo: leftAnchor),
             filterView.rightAnchor.constraint(equalTo: rightAnchor),
             
-            videoCardsContainerView.topAnchor.constraint(equalTo: filterView.bottomAnchor, constant: 16),
+            videoCardsContainerView.topAnchor.constraint(equalTo: filterView.bottomAnchor, constant: 25),
             videoCardsContainerView.leftAnchor.constraint(equalTo: leftAnchor),
             videoCardsContainerView.rightAnchor.constraint(equalTo: rightAnchor),
             videoCardsContainerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),

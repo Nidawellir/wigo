@@ -254,6 +254,7 @@ extension VideoCardView {
         
         guard let path = Bundle.main.path(forResource: videoCardModel.videoFileName, ofType: videoCardModel.videoFormatName) else { return }
         videoPlayer = AVPlayer(url: URL(fileURLWithPath: path))
+        print("1111111\(path)")
         
         playerView.player = videoPlayer
         playerView.videoGravity = .resizeAspectFill

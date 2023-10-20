@@ -9,4 +9,5 @@ import Foundation
 
 protocol VideoRecordingModuleOutput: AnyObject {
     func  closeVideoRecording()
+    func openVideoPreview(videoUrl: String)
 }

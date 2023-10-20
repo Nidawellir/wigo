@@ -20,6 +20,7 @@ final class MainScreanCoordinator: BaseCoordinator<Void, Void> {
     private weak var filtersModuleInput: FiltersModuleInput?
     private weak var videoOnboardingInput: VideoOnboardingModuleInput?
     private weak var videoRecorderInput: VideoRecordingModuleInput?
+    private weak var videoPreviewModuleInput: VideoPreviewModuleInput?
     
     // MARK: - Override methods
     
@@ -109,7 +110,28 @@ extension MainScreanCoordinator: VideoOnboardingModuleOutput {
 // MARK: - VideoRecordingModuleOutput
 
 extension MainScreanCoordinator: VideoRecordingModuleOutput {
+    func openVideoPreview(videoUrl: String) {
+        let videoPreviewViewController: UIViewController
+        
+        (videoPreviewViewController, videoPreviewModuleInput) = VideoPreviewBuilder.build(with: self)
+        
+        videoPreviewModuleInput?.getVideoUrl(videoUrl: videoUrl)
+        
+        navigationController.modalPresentationStyle = .overFullScreen
+        navigationController.pushViewController(videoPreviewViewController, animated: false)
+    }
+    
     func closeVideoRecording() {
         navigationController.popViewController(animated: false)
+    }
+}
+
+extension MainScreanCoordinator: VideoPreviewModuleOutput {
+    func backToVideoRecording() {
+        navigationController.popViewController(animated: false)
+    }
+    
+    func openMatchingDescription() {
+        
     }
 }

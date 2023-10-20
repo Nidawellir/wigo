@@ -86,8 +86,6 @@ extension VideoCardsContainerView {
             index = 0
         }
         
-        print("2222222222 \(videoCardModels)")
-        
         currentVideoCardView?.removeFromSuperview()
         currentVideoCardView = nil
         
@@ -114,9 +112,9 @@ extension VideoCardsContainerView {
         case .changed:
             currentVideoCardView?.transform = CGAffineTransform(translationX: translation.x, y: .zero)
             if translation.x > pointForAction {
-                currentVideoCardView?.rightSwipe()
-            } else if translation.x < -pointForAction {
                 currentVideoCardView?.leftSwipe()
+            } else if translation.x < -pointForAction {
+                currentVideoCardView?.rightSwipe()
             }
         case .ended:
             if translation.x > pointForAction {

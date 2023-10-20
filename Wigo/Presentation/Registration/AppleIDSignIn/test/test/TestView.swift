@@ -1,8 +1,8 @@
 //
-//  VideoRecordingView.swift
-//  Wigo-Native
+//  TestView.swift
+//  test
 //
-//  Created by Apple User on 7/25/23.
+//  Created by Apple User on 10/12/23.
 //
 
 import AVFoundation
@@ -10,7 +10,6 @@ import UIKit
 
 protocol VideoRecordingViewDelegate: AnyObject {
     func closeVideoRecording()
-    func openVideoPreview(videoUrl: String)
 }
 
 final class VideoRecordingView: UIView {
@@ -21,32 +20,16 @@ final class VideoRecordingView: UIView {
     
     // MARK: - Capture Session
     
-    private var session: AVCaptureSession?
+    private var captureSession = AVCaptureSession()
     
     // MARK: - Private properties
     
     var timer: Timer = Timer()
     var count: Int = 15
-    var timerCounting: Bool = false
+    var timerCounting: Bool = true
     var url: URL?
     var cameraConfig: CameraConfiguration!
-    var videoRecordingStarted: Bool = false {
-        didSet{
-            if videoRecordingStarted {
-                print("1")
-            } else {
-                print("2")
-            }
-        }
-    }
-    
-    // MARK: - Photo Output
-    
-    let output = AVCapturePhotoOutput()
-    
-    // MARK: - Video preview
-    
-    let previewLayer = AVCaptureVideoPreviewLayer()
+    var videoRecordingStarted: Bool = true
     
     // MARK: - UI
     
@@ -61,10 +44,23 @@ final class VideoRecordingView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .red
-        
         configureViews()
         configureLayouts()
+    }
+    
+    fileprivate func registerNotification() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: NSNotification.Name(rawValue: "App is going background"), object: nil)
+        
+        notificationCenter.addObserver(self, selector: #selector(appCameToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
+    @objc func appMovedToBackground() {
+        print("app enters background")
+    }
+    
+    @objc func appCameToForeground() {
+        print("app enters foreground")
     }
     
     func cameraConfiguration() {
@@ -79,13 +75,11 @@ final class VideoRecordingView: UIView {
     }
     
     private func configureViews() {
-        backgroundColor = Colors.CreateAccount.darkBackground.color
+        backgroundColor = .black
         
-        closeButton.setImage(Images.VideoRecord.cross.image, for: .normal)
-        closeButton.addTarget(self, action: #selector(didTapCloseButton), for: .touchUpInside)
+//        closeButton.setImage(Images.VideoRecord.cross.image, for: .normal)
+//        closeButton.addTarget(self, action: #selector(didTapCloseButton), for: .touchUpInside)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
-    
-        recorderView.layer.addSublayer(previewLayer)
         
         recorderView.backgroundColor = .black
         recorderView.layer.masksToBounds = true
@@ -103,32 +97,23 @@ final class VideoRecordingView: UIView {
         timerLabel.textColor = .white
         timerLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        shutterButton.setImage(Images.VideoRecord.record.image, for: .normal)
+//        shutterButton.setImage(Images.VideoRecord.record.image, for: .normal)
         shutterButton.addTarget(self, action: #selector(buttonDown), for: .touchDown)
         shutterButton.addTarget(self, action: #selector(buttonUp), for: [.touchUpInside, .touchUpOutside])
         shutterButton.translatesAutoresizingMaskIntoConstraints = false
 
         dotImageView.translatesAutoresizingMaskIntoConstraints = false
 
-        toggleCameraButton.setImage(Images.VideoRecord.spiner.image, for: .normal)
+//        toggleCameraButton.setImage(Images.VideoRecord.spiner.image, for: .normal)
         toggleCameraButton.addTarget(self, action: #selector(toggleCamera), for: .touchUpInside)
         toggleCameraButton.translatesAutoresizingMaskIntoConstraints = false
     }
-    
-    @objc
-    private func didTapCloseButton() {
-        delegate?.closeVideoRecording()
-    }
-    
-    @objc func video(_ video: String, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
-        delegate?.openVideoPreview(videoUrl: video)
-    }
-    
+
     @objc
     private func buttonDown(_ sender: Any) {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(step), userInfo: nil, repeats: true)
-        
-        cameraConfig.recordVideo { (url, error) in
+        print("123")
+        self.cameraConfig.recordVideo { (url, error) in
             guard let url = url else {
                 print(error ?? "Video recording error")
                 return
@@ -136,16 +121,33 @@ final class VideoRecordingView: UIView {
             UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(self.video(_:didFinishSavingWithError:contextInfo:)), nil)
         }
     }
-
+    
+    @objc func video(_ video: String, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        
+        print("video")
+    }
+    
     @objc
     private func buttonUp(_ sender: Any) {
         timer.invalidate()
         
-        cameraConfig.stopRecording { (error) in
+        print("223")
+        
+        videoRecordingStarted = false
+        self.cameraConfig.stopRecording { (error) in
             print(error ?? "Video recording error")
         }
     }
-
+    
+    @objc
+    private func toggleCamera(_ sender: Any) {
+        do {
+            try cameraConfig.switchCameras()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     @objc
     private func step() {
         if count > 0 {
@@ -154,20 +156,11 @@ final class VideoRecordingView: UIView {
             timer.invalidate()
             count = 15
         }
-
+        
         let newString = String(format: "%02d", count)
-
+            
         timerLabel.text = "00:\(newString)"
-
-    }
-
-    @objc
-    private func toggleCamera(_ sender: Any) {
-        do {
-            try cameraConfig.switchCameras()
-        } catch {
-            print(error.localizedDescription)
-        }
+        
     }
     
     private func configureLayouts() {
@@ -215,16 +208,5 @@ final class VideoRecordingView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension VideoRecordingView: UIImagePickerControllerDelegate {
-    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        if info[UIImagePickerController.InfoKey.originalImage] is UIImage {
-            let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL
-            
-            print("1111111 \(String(describing: videoURL))")
-        }
     }
 }

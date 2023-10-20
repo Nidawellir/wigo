@@ -40,6 +40,12 @@ final class VideoRecordingViewController: UIViewController {
         view = videoRecordingView
         videoRecordingView.delegate = self
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        videoRecordingView.cameraConfiguration()
+    }
 }
 
 // MARK: - VideoRecordingModuleInput
@@ -49,6 +55,10 @@ extension VideoRecordingViewController: VideoRecordingModuleInput {}
 // MARK: - Public methods
 
 extension VideoRecordingViewController: VideoRecordingViewDelegate {
+    func openVideoPreview(videoUrl: String) {
+        output?.openVideoPreview(videoUrl: videoUrl)
+    }
+    
     func closeVideoRecording() {
         output?.closeVideoRecording()
     }
@@ -61,3 +71,5 @@ extension VideoRecordingViewController {}
 // MARK: - VideoRecordingPresenterOutput
 
 extension VideoRecordingViewController: VideoRecordingPresenterOutput {}
+
+

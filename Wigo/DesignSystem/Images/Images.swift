@@ -69,8 +69,10 @@ internal enum Images {
     internal static let third = ImageAsset(name: "videoOnboarding/third")
   }
   internal enum VideoRecord {
+    internal static let check = ImageAsset(name: "videoRecord/check")
     internal static let cross = ImageAsset(name: "videoRecord/cross")
     internal static let record = ImageAsset(name: "videoRecord/record")
+    internal static let retry = ImageAsset(name: "videoRecord/retry")
     internal static let spiner = ImageAsset(name: "videoRecord/spiner")
   }
 }
