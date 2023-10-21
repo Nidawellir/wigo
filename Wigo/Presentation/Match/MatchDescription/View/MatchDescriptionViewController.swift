@@ -77,4 +77,8 @@ extension MatchDescriptionViewController: MatchDescriptionViewDelegate {
         
         output?.openPreviewVideo(with: videoURL)
     }
+    
+    func openCompletedRequest() {
+        
+    }
 }

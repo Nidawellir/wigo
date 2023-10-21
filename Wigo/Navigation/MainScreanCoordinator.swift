@@ -21,6 +21,8 @@ final class MainScreanCoordinator: BaseCoordinator<Void, Void> {
     private weak var videoOnboardingInput: VideoOnboardingModuleInput?
     private weak var videoRecorderInput: VideoRecordingModuleInput?
     private weak var videoPreviewModuleInput: VideoPreviewModuleInput?
+    private weak var matchDescriptionModuleInput: MatchDescriptionModuleInput?
+    private weak var matchPreviewModuleInput: MatchPreviewModuleInput?
     
     // MARK: - Override methods
     
@@ -131,7 +133,20 @@ extension MainScreanCoordinator: VideoPreviewModuleOutput {
         navigationController.popViewController(animated: false)
     }
     
-    func openMatchingDescription() {
+    func openMatchingDescription(videoUrl: URL) {
+        let matchCoordinator = MatchCoordinator(navigationController: navigationController)
+
+        capture(coordinator: matchCoordinator)
         
+        matchCoordinator.start(with: videoUrl, completionHandler: { [weak self, weak matchCoordinator] _ in
+            guard let self = self, let matchCoordinator = matchCoordinator else { return }
+
+            self.decapture(coordinator: matchCoordinator)
+        })
+    }
+    
+    private func makeMockVideoURL() -> URL {
+        guard let mockVideoPath = Bundle.main.path(forResource: "SexyGirlDance", ofType:"MP4") else { fatalError() }
+        return URL(fileURLWithPath: mockVideoPath)
     }
 }

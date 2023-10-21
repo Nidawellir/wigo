@@ -122,6 +122,9 @@ final class VideoRecordingView: UIView {
     
     @objc func video(_ video: String, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
         delegate?.openVideoPreview(videoUrl: video)
+        timer.invalidate()
+        count = 15
+        timerLabel.text = "00:\(count)"
     }
     
     @objc

@@ -74,6 +74,7 @@ internal enum Images {
   }
   internal enum VideoRecord {
     internal static let check = ImageAsset(name: "videoRecord/check")
+    internal static let completedSendRequest = ImageAsset(name: "videoRecord/completedSendRequest")
     internal static let cross = ImageAsset(name: "videoRecord/cross")
     internal static let record = ImageAsset(name: "videoRecord/record")
     internal static let retry = ImageAsset(name: "videoRecord/retry")

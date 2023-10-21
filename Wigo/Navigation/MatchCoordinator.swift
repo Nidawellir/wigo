@@ -37,7 +37,7 @@ final class MatchCoordinator: BaseCoordinator<URL, Void> {
 
 extension MatchCoordinator: MatchDescriptionModuleOutput {
     func closeMatchDescriptionMatch() {
-        print("-closeMatchDescriptionMatch()")
+        navigationController.popViewController(animated: false)
     }
     
     func openPreviewVideo(with videoURL: URL) {
@@ -62,3 +62,11 @@ extension MatchCoordinator: MatchPreviewModuleOutput {
         navigationController.popViewController(animated: true)
     }
 }
+
+// MARK: - CompletedSendRequestModuleOutput
+
+//extension MatchCoordinator: CompletedSendRequestModuleOutput {
+//    func closeCompletedSendRequestView() {
+//        navigationController.popToRootViewController(animated: true)
+//    }
+//}

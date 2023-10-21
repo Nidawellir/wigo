@@ -10,7 +10,7 @@ import AVFoundation
 
 protocol VideoPreviewViewDelegate: AnyObject {
     func backToVideoRecording()
-    func openMatchingDescription()
+    func openMatchingDescription(videoUrl: URL)
 }
 
 final class VideoPreviewView: UIView {
@@ -22,6 +22,7 @@ final class VideoPreviewView: UIView {
     // MARK: - Private properties
     
     private var videoPlayer: AVPlayer?
+    private var videoURL: URL?
     
     // MARK: - UI properties
     
@@ -38,6 +39,7 @@ final class VideoPreviewView: UIView {
         
         configureViews()
         configureLayouts()
+        configureBindings()
     }
     
     private func configureViews() {
@@ -64,12 +66,32 @@ final class VideoPreviewView: UIView {
     
     @objc
     private func didTapVideoDubbingButton() {
+        videoPlayer?.pause()
         delegate?.backToVideoRecording()
     }
     
     @objc
     private func didTapCompletedVideoButton() {
-        delegate?.openMatchingDescription()
+        videoPlayer?.pause()
+        guard let url = videoURL else { return }
+        delegate?.openMatchingDescription(videoUrl: url)
+    }
+    
+    private func configureBindings() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(restartVideo),
+            name: .AVPlayerItemDidPlayToEndTime,
+            object: self.videoPlayer
+        )
+    }
+    
+    @objc
+    private func restartVideo() {
+        videoPlayer?.pause()
+        videoPlayer?.currentItem?.seek(to: CMTime.zero, completionHandler: { [weak self] _ in
+            self?.videoPlayer?.play()
+        })
     }
     
     private func configureLayouts() {
@@ -105,7 +127,7 @@ final class VideoPreviewView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        playerView.frame = containerView.frame
+        playerView.frame = containerView.bounds
     }
 }
 
@@ -113,8 +135,10 @@ final class VideoPreviewView: UIView {
 
 extension VideoPreviewView {
     func set(videoName: String, videoFormatName: String) {
-        print(videoName, videoFormatName)
-        videoPlayer = AVPlayer(url: URL(fileURLWithPath: videoName))
+        let videoURL = URL(fileURLWithPath: videoName)
+        videoPlayer = AVPlayer(url: videoURL)
+        
+        self.videoURL = videoURL
                 
         playerView.player = videoPlayer
         playerView.videoGravity = .resizeAspectFill

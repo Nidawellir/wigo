@@ -45,6 +45,8 @@ final class MatchDescriptionView: UIView {
     private let textView: UITextView = .init()
     private let placeholderLabel: UILabel = .init()
     private let charactersLabel: UILabel = .init()
+    private let sendButton: UIButton = .init()
+    private let sendRequestLabel: UILabel = .init()
     
     // MARK: - Initialization
     
@@ -95,6 +97,16 @@ final class MatchDescriptionView: UIView {
         charactersLabel.textAlignment = .right
         charactersLabel.alpha = 0.4
         charactersLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        sendButton.backgroundColor = .clear
+        sendButton.addTarget(self, action: #selector(didTapSendButton), for: .touchUpInside)
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        sendRequestLabel.text = "Send request"
+        sendRequestLabel.textAlignment = .center
+        sendRequestLabel.font = .systemFont(ofSize: 14, weight: .semibold)
+        sendRequestLabel.textColor = Colors.CreateAccount.lightGrayTetxColor.color
+        sendRequestLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
     @objc
@@ -105,6 +117,10 @@ final class MatchDescriptionView: UIView {
     @objc
     private func didTapThumbnailView() {
         delegate?.didTapThumbnailView()
+    }
+    @objc
+    private func didTapSendButton() {
+        
     }
     
     private func updateCharactersLabelText() {
@@ -121,6 +137,8 @@ final class MatchDescriptionView: UIView {
         addSubview(textView)
         addSubview(placeholderLabel)
         addSubview(charactersLabel)
+        addSubview(sendButton)
+        sendButton.addSubview(sendRequestLabel)
         
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Constants.backButtonTopSpace),
@@ -154,7 +172,15 @@ final class MatchDescriptionView: UIView {
             charactersLabel.topAnchor.constraint(equalTo: textView.bottomAnchor),
             charactersLabel.leadingAnchor.constraint(equalTo: thumbnailView.trailingAnchor, constant: Constants.textLeadingSpace),
             charactersLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.textTrailingSpace),
-            charactersLabel.bottomAnchor.constraint(equalTo: thumbnailView.bottomAnchor)
+            charactersLabel.bottomAnchor.constraint(equalTo: thumbnailView.bottomAnchor),
+            
+            sendButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            sendButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            sendButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            sendButton.heightAnchor.constraint(equalToConstant: 30),
+            
+            sendRequestLabel.centerXAnchor.constraint(equalTo: sendButton.centerXAnchor),
+            sendRequestLabel.centerYAnchor.constraint(equalTo: sendButton.centerYAnchor),
         ])
     }
     

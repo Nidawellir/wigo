@@ -10,5 +10,5 @@ import Foundation
 protocol VideoPreviewModuleOutput: AnyObject {
     func backToVideoRecording()
 
-    func openMatchingDescription()
+    func openMatchingDescription(videoUrl: URL)
 }

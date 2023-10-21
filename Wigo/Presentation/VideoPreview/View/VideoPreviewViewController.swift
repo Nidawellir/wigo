@@ -61,11 +61,11 @@ extension VideoPreviewViewController: VideoPreviewPresenterOutput {}
 // MARK: - VideoPreviewPresenterOutput
 
 extension VideoPreviewViewController: VideoPreviewViewDelegate {
-    func backToVideoRecording() {
-        output?.backToVideoRecording()
+    func openMatchingDescription(videoUrl: URL) {
+        output?.openMatchingDescription(videoUrl: videoUrl)
     }
     
-    func openMatchingDescription() {
-        output?.openMatchingDescription()
+    func backToVideoRecording() {
+        output?.backToVideoRecording()
     }
 }

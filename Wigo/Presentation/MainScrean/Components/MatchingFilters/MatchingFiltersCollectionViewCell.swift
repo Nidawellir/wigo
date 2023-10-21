@@ -75,7 +75,5 @@ final class MatchingFiltersCollectionViewCell: UICollectionViewCell {
 extension MatchingFiltersCollectionViewCell {
     func set(title: String) {
         titleLabel.text = title
-        
-        print("123456")
     }
 }

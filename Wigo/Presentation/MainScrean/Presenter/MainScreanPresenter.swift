@@ -75,6 +75,5 @@ extension MainScreanPresenter: MainScreanPresenterInput {
 //        .store(in: &cancellableSet)
         
         output?.didFetchFilter(viewModels: filterViewModel)
-        print("33333\(filterViewModel)")
     }
 }

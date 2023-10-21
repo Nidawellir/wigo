@@ -80,8 +80,6 @@ extension MatchingFiltersView {
         matchingFiltersModels = viewModels
         
         collectionView.reloadData()
-        
-        print("set1")
     }
 }
 
