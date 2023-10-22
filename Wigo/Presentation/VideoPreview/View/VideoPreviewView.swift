@@ -46,7 +46,7 @@ final class VideoPreviewView: UIView {
         backgroundColor = Colors.CreateAccount.darkBackground.color
         
         containerView.layer.addSublayer(playerView)
-        containerView.backgroundColor = .blue
+        containerView.backgroundColor = Colors.CreateAccount.lightGrayTetxColor.color
         containerView.layer.cornerRadius = 12
         containerView.layer.masksToBounds = true
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -73,6 +73,7 @@ final class VideoPreviewView: UIView {
     @objc
     private func didTapCompletedVideoButton() {
         videoPlayer?.pause()
+        videoPlayer?.volume = 0
         guard let url = videoURL else { return }
         delegate?.openMatchingDescription(videoUrl: url)
     }

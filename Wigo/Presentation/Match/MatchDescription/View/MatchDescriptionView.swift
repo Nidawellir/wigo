@@ -10,6 +10,7 @@ import UIKit
 protocol MatchDescriptionViewDelegate: AnyObject {
     func didTapBackButton()
     func didTapThumbnailView()
+    func openCompletedSendRequest()
 }
 
 final class MatchDescriptionView: UIView {
@@ -120,7 +121,7 @@ final class MatchDescriptionView: UIView {
     }
     @objc
     private func didTapSendButton() {
-        
+        delegate?.openCompletedSendRequest()
     }
     
     private func updateCharactersLabelText() {

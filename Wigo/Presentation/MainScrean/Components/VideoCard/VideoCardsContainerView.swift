@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol VideoCardsContainerDelegate: AnyObject {
+    func openMatchingFlow()
+}
+
 final class VideoCardsContainerView: UIView {
     
     // MARK: - ViewModel
@@ -17,6 +21,10 @@ final class VideoCardsContainerView: UIView {
     private var matchingFiltersModel: [MatchingFiltersCollectionViewCell.ViewModel] = []
     private var currentViewModelIndex: Int?
     private var isLayoutSubviewsCalled: Bool = false
+    
+    // MARK: - Publick properties
+    
+    weak var delegate: VideoCardsContainerDelegate?
     
     // MARK: - UI properties
     
@@ -122,6 +130,7 @@ extension VideoCardsContainerView {
                     self.currentVideoCardView?.transform = CGAffineTransform(translationX: self.frame.width - 16, y: .zero)
                 }, completion: {(_ complete: Bool) -> Void in
                     self.showNextVideoCardView()
+                    self.delegate?.openMatchingFlow()
                 })
             } else if translation.x < -pointForAction {
                 guard let translationX = currentVideoCardView?.frame.width else { return }

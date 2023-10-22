@@ -51,9 +51,9 @@ final class MainScreanPresenter {
     ]
     
     private let videoCardModels: [VideoCardView.ViewModel] = [
-        .init(name: "Zahar", description: "Привет", location: "У себя дома", timeToUser: "1 мин", videoFileName: "wild", videoFormatName: "mp4", matchingFilters: ["sdadsada", "sadaddsd", "dadaad", "dsadas"]),
-        .init(name: "Olegsey", description: "Привет", location: "За спиной", timeToUser: "5 мин", videoFileName: "wild", videoFormatName: "mp4", matchingFilters: ["sdadsada", "sadaddsd", "dadaad", "dsadas"]),
-        .init(name: "Daria", description: "Привет, меня зовут даша, приглашаю тебя на свою вечеринку", location: "Дома", timeToUser: "5 мин", videoFileName: "wild", videoFormatName: "mp4", matchingFilters: ["sdadsada", "sadaddsd", "dadaad", "dsadas"]),
+        .init(name: "Zahar", description: "Привет", location: "У себя дома", timeToUser: "1 мин", videoFileName: "SexyGirlDance", videoFormatName: "MP4", matchingFilters: ["sdadsada", "sadaddsd", "dadaad", "dsadas"]),
+        .init(name: "Olegsey", description: "Привет", location: "За спиной", timeToUser: "5 мин", videoFileName: "SexyGirlDance", videoFormatName: "MP4", matchingFilters: ["sdadsada", "sadaddsd", "dadaad", "dsadas"]),
+        .init(name: "Daria", description: "Привет, меня зовут даша, приглашаю тебя на свою вечеринку", location: "Дома", timeToUser: "5 мин", videoFileName: "SexyGirlDance", videoFormatName: "MP4", matchingFilters: ["sdadsada", "sadaddsd", "dadaad", "dsadas"]),
     ]
 }
 

@@ -17,6 +17,9 @@ final class VideoCardView: UIView {
     private var videoPlayer: AVPlayer?
     private var shadowView: UIView = .init()
     
+    // MARK: - Publick properties
+    
+    
     // MARK: - ViewModel
     
     struct ViewModel {
@@ -52,6 +55,7 @@ final class VideoCardView: UIView {
         
         startTimer()
         configureViews()
+        configureBindings()
         configureLayouts()
     }
     
@@ -104,7 +108,6 @@ final class VideoCardView: UIView {
         locationImage.image = Images.MainScrean.location.image
         locationImage.translatesAutoresizingMaskIntoConstraints = false
         
-        locationLabel.text = "Мухосранск"
         locationLabel.font = .systemFont(ofSize: 10, weight: .bold)
         locationLabel.textColor = Colors.CreateAccount.whiteColor.color
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -116,9 +119,32 @@ final class VideoCardView: UIView {
         optionButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    private func configureBindings() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(restartVideo),
+            name: .AVPlayerItemDidPlayToEndTime,
+            object: self.videoPlayer?.currentItem
+        )
+    }
+    
+    @objc
+    private func restartVideo() {
+        videoPlayer?.pause()
+        videoPlayer?.currentItem?.seek(to: CMTime.zero, completionHandler: { [weak self] _ in
+            self?.videoPlayer?.play()
+        })
+    }
+    
     @objc
     private func didTapMuteButton() {
-        print("didTapMuteButton")
+        videoPlayer?.isMuted.toggle()
+        if videoPlayer?.isMuted == true {
+            muteButton.setImage(Images.MainScrean.mute.image, for: .normal)
+        } else {
+            muteButton.setImage(Images.MainScrean.checkMarkFilterOn.image, for: .normal)
+        }
+        
     }
     
     private func startTimer() {
@@ -257,7 +283,7 @@ extension VideoCardView {
         
         playerView.player = videoPlayer
         playerView.videoGravity = .resizeAspectFill
-        videoPlayer?.volume = 0
+        videoPlayer?.isMuted = true
         videoPlayer?.play()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { self.videoPlayer?.play() }

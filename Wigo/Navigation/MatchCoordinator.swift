@@ -13,6 +13,7 @@ final class MatchCoordinator: BaseCoordinator<URL, Void> {
     
     private weak var matchDescriptionModuleInput: MatchDescriptionModuleInput?
     private weak var matchPreviewModuleInput: MatchPreviewModuleInput?
+    private weak var completedSendRequestInput: CompletedSendRequestModuleInput?
     
     // MARK: - Override methods
     
@@ -36,7 +37,7 @@ final class MatchCoordinator: BaseCoordinator<URL, Void> {
 // MARK: - MatchDescriptionModuleOutput
 
 extension MatchCoordinator: MatchDescriptionModuleOutput {
-    func closeMatchDescriptionMatch() {
+   func closeMatchDescriptionMatch() {
         navigationController.popViewController(animated: false)
     }
     
@@ -53,6 +54,14 @@ extension MatchCoordinator: MatchDescriptionModuleOutput {
         
         navigationController.pushViewController(matchPreviewViewController, animated: true)
     }
+    
+    func openCompletedSendRequest() {
+        let completedSendRequestViewController: UIViewController
+        
+        (completedSendRequestViewController, completedSendRequestInput) = CompletedSendRequestBuilder.build(with: self)
+        
+        navigationController.pushViewController(completedSendRequestViewController, animated: true)
+    }
 }
 
 // MARK: - MatchPreviewModuleOutput
@@ -65,8 +74,8 @@ extension MatchCoordinator: MatchPreviewModuleOutput {
 
 // MARK: - CompletedSendRequestModuleOutput
 
-//extension MatchCoordinator: CompletedSendRequestModuleOutput {
-//    func closeCompletedSendRequestView() {
-//        navigationController.popToRootViewController(animated: true)
-//    }
-//}
+extension MatchCoordinator: CompletedSendRequestModuleOutput {
+    func closeCompletedSendRequest() {
+        navigationController.popToRootViewController(animated: true)
+    }
+}

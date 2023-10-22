@@ -25,20 +25,14 @@ final class VideoRecordingView: UIView {
     
     // MARK: - Private properties
     
-    var timer: Timer = Timer()
-    var count: Int = 15
-    var timerCounting: Bool = false
-    var url: URL?
-    var cameraConfig: CameraConfiguration!
-    var videoRecordingStarted: Bool = false {
-        didSet{
-            if videoRecordingStarted {
-                print("1")
-            } else {
-                print("2")
-            }
-        }
-    }
+    private var timer: Timer = Timer()
+    private var count: Int = 15
+    private var timerCounting: Bool = false
+    private var url: URL?
+    private var cameraConfig: CameraConfiguration!
+    private let trackShape = CAShapeLayer()
+    private let shape = CAShapeLayer()
+    private let circle: UIView = .init()
     
     // MARK: - Photo Output
     
@@ -56,7 +50,6 @@ final class VideoRecordingView: UIView {
     private let timerLabel: UILabel = .init()
     private let toggleCameraButton: UIButton = .init()
     private let shutterButton: UIButton = .init()
-    private let dotImageView: UIImageView = .init()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -108,11 +101,26 @@ final class VideoRecordingView: UIView {
         shutterButton.addTarget(self, action: #selector(buttonUp), for: [.touchUpInside, .touchUpOutside])
         shutterButton.translatesAutoresizingMaskIntoConstraints = false
 
-        dotImageView.translatesAutoresizingMaskIntoConstraints = false
-
         toggleCameraButton.setImage(Images.VideoRecord.spiner.image, for: .normal)
         toggleCameraButton.addTarget(self, action: #selector(toggleCamera), for: .touchUpInside)
         toggleCameraButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        let circlePath = UIBezierPath(arcCenter: .init(x: 36, y: 36), radius: 34, startAngle: -(.pi / 2), endAngle: .pi * 2, clockwise: true)
+        
+        trackShape.path = circlePath.cgPath
+        trackShape.fillColor = UIColor.clear.cgColor
+        trackShape.strokeColor = UIColor.lightGray.cgColor
+        trackShape.lineWidth = 10
+        circle.layer.addSublayer(trackShape)
+        
+        shape.path = circlePath.cgPath
+        shape.lineWidth = 10
+        shape.strokeColor = UIColor.white.cgColor
+        shape.fillColor = UIColor.clear.cgColor
+        shape.strokeEnd = 0
+        circle.layer.addSublayer(shape)
+        
+        circle.translatesAutoresizingMaskIntoConstraints = false
     }
     
     @objc
@@ -130,6 +138,13 @@ final class VideoRecordingView: UIView {
     @objc
     private func buttonDown(_ sender: Any) {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(step), userInfo: nil, repeats: true)
+        print("111111")
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.toValue = 1
+        animation.duration = 15
+        animation.isRemovedOnCompletion = false
+        animation.fillMode = .forwards
+        shape.add(animation, forKey: "animation")
         
         cameraConfig.recordVideo { (url, error) in
             guard let url = url else {
@@ -179,7 +194,7 @@ final class VideoRecordingView: UIView {
         addSubview(timerView)
         addSubview(timerLabel)
         addSubview(shutterButton)
-        addSubview(dotImageView)
+        shutterButton.addSubview(circle)
         addSubview(toggleCameraButton)
         
         NSLayoutConstraint.activate([
@@ -195,7 +210,6 @@ final class VideoRecordingView: UIView {
             timerView.topAnchor.constraint(equalTo: recorderView.bottomAnchor, constant: 18),
             timerView.heightAnchor.constraint(equalToConstant: 32),
             timerView.centerXAnchor.constraint(equalTo: centerXAnchor),
-//            timerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
             
             timerLabel.topAnchor.constraint(equalTo: timerView.topAnchor, constant: 12),
             timerLabel.leftAnchor.constraint(equalTo: timerView.leftAnchor, constant: 12),
@@ -207,6 +221,11 @@ final class VideoRecordingView: UIView {
             shutterButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40),
             shutterButton.heightAnchor.constraint(equalToConstant: 72),
             shutterButton.widthAnchor.constraint(equalToConstant: 72),
+            
+            circle.centerXAnchor.constraint(equalTo: shutterButton.centerXAnchor),
+            circle.centerYAnchor.constraint(equalTo: shutterButton.centerYAnchor),
+            circle.heightAnchor.constraint(equalToConstant: 72),
+            circle.widthAnchor.constraint(equalToConstant: 72),
             
             toggleCameraButton.leftAnchor.constraint(equalTo: shutterButton.rightAnchor, constant: 50),
             toggleCameraButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -50),

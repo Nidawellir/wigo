@@ -44,6 +44,7 @@ final class MainScreanView: UIView {
         filterView.translatesAutoresizingMaskIntoConstraints = false
         
         videoCardsContainerView.isHidden = false
+        videoCardsContainerView.delegate = self
         videoCardsContainerView.translatesAutoresizingMaskIntoConstraints = false
         
 //        findEventsView.translatesAutoresizingMaskIntoConstraints = false
@@ -104,10 +105,15 @@ extension MainScreanView: CustomNavigationBarDelegate {
     
     func didTapEventButton() {
         delegate?.didTapEventButton()
-        print("didTapEvent")
     }
     
     func didTapFilterButton() {
         delegate?.didTapFilterButton()
+    }
+}
+
+extension MainScreanView: VideoCardsContainerDelegate {
+    func openMatchingFlow() {
+        delegate?.didTapEventButton()
     }
 }

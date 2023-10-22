@@ -68,6 +68,10 @@ extension MatchDescriptionViewController: MatchDescriptionPresenterOutput {
 // MARK: - MatchDescriptionViewDelegate
 
 extension MatchDescriptionViewController: MatchDescriptionViewDelegate {
+    func openCompletedSendRequest() {
+        output?.openCompletedSendRequest()
+    }
+    
     func didTapBackButton() {
         output?.closeMatchDescriptionMatch()
     }
@@ -76,9 +80,5 @@ extension MatchDescriptionViewController: MatchDescriptionViewDelegate {
         guard let videoURL = presenter.videoURL else { return }
         
         output?.openPreviewVideo(with: videoURL)
-    }
-    
-    func openCompletedRequest() {
-        
     }
 }

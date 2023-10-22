@@ -10,4 +10,5 @@ import Foundation
 protocol MatchDescriptionModuleOutput: AnyObject {
     func closeMatchDescriptionMatch()
     func openPreviewVideo(with videoURL: URL)
+    func openCompletedSendRequest()
 }
