@@ -45,7 +45,7 @@ final class CustomNavigationBarView: UIView {
         avatarButton.addTarget(self, action: #selector(didTapAvatarButton), for: .touchUpInside)
         avatarButton.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabel.text = "Привет,"
+        titleLabel.text = Localizations.MainScrean.hellow
         titleLabel.font = .systemFont(ofSize: 12, weight: .medium)
         titleLabel.textColor = Colors.CreateAccount.lightGrayTetxColor.color
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

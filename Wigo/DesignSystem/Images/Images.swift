@@ -22,10 +22,6 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Images {
-  internal enum Match {
-    internal static let backButton = ImageAsset(name: "Match/backButton")
-    internal static let playButton = ImageAsset(name: "Match/playButton")
-  }
   internal enum CreateAccount {
     internal static let apple = ImageAsset(name: "createAccount/apple")
     internal static let backArrow = ImageAsset(name: "createAccount/backArrow")
@@ -65,6 +61,11 @@ internal enum Images {
     internal static let locationArrow = ImageAsset(name: "mainScrean/locationArrow")
     internal static let mute = ImageAsset(name: "mainScrean/mute")
     internal static let setting = ImageAsset(name: "mainScrean/setting")
+    internal static let soundOn = ImageAsset(name: "mainScrean/soundOn")
+  }
+  internal enum Match {
+    internal static let backButton = ImageAsset(name: "match/backButton")
+    internal static let playButton = ImageAsset(name: "match/playButton")
   }
   internal enum VideoOnboarding {
     internal static let first = ImageAsset(name: "videoOnboarding/first")
@@ -73,9 +74,12 @@ internal enum Images {
     internal static let third = ImageAsset(name: "videoOnboarding/third")
   }
   internal enum VideoRecord {
+    internal static let arrow = ImageAsset(name: "videoRecord/arrow")
+    internal static let bigDot = ImageAsset(name: "videoRecord/bigDot")
     internal static let check = ImageAsset(name: "videoRecord/check")
     internal static let completedSendRequest = ImageAsset(name: "videoRecord/completedSendRequest")
     internal static let cross = ImageAsset(name: "videoRecord/cross")
+    internal static let litleDot = ImageAsset(name: "videoRecord/litleDot")
     internal static let record = ImageAsset(name: "videoRecord/record")
     internal static let retry = ImageAsset(name: "videoRecord/retry")
     internal static let spiner = ImageAsset(name: "videoRecord/spiner")

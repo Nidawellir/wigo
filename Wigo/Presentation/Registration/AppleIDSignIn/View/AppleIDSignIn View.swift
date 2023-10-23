@@ -42,18 +42,8 @@ final class AppleIDSignInView: UIView {
         logoImageView.image = Images.CreateAccount.logo.image
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         
-//        signInButton.layer.cornerRadius = 4
-//        signInButton.backgroundColor = Colors.CreateAccount.whiteColor.color
         signInButton.addTarget(self, action: #selector(didTapSignInButton), for: .touchUpInside)
         signInButton.translatesAutoresizingMaskIntoConstraints = false
-        
-//        appleImageView.image = Images.CreateAccount.apple.image
-//        appleImageView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        signInLabel.text = "Sign in with Apple"
-//        signInLabel.font = .systemFont(ofSize: 16, weight: .medium)
-//        signInLabel.textColor = Colors.CreateAccount.darkBackground.color
-//        signInLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
     @objc

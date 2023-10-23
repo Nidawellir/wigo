@@ -142,7 +142,7 @@ final class VideoCardView: UIView {
         if videoPlayer?.isMuted == true {
             muteButton.setImage(Images.MainScrean.mute.image, for: .normal)
         } else {
-            muteButton.setImage(Images.MainScrean.checkMarkFilterOn.image, for: .normal)
+            muteButton.setImage(Images.MainScrean.soundOn.image, for: .normal)
         }
         
     }

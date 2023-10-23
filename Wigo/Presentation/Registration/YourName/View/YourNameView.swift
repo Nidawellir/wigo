@@ -32,7 +32,7 @@ final class YourNameView: UIView {
     private let clearTextButton: UIButton = .init()
     private let delimiterView: UIView = .init()
     private let warningLabel: UILabel = .init()
-    private let continueButton: ContinueButton = .init(title: "Продолжить")
+    private let continueButton: ContinueButton = .init(title: Localizations.CreateAccount.continueButton)
     
     // MARK: - Initialization
     
@@ -60,18 +60,18 @@ final class YourNameView: UIView {
         backButton.setImage(Images.CreateAccount.backArrow.image, for: .normal)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabel.text = "Создать аккаунт"
+        titleLabel.text = Localizations.CreateAccount.title
         titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
         titleLabel.textColor = Colors.CreateAccount.whiteColor.color
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        nameTitleLabel.text = "Твое имя"
+        nameTitleLabel.text = Localizations.YourName.yourName
         nameTitleLabel.font = .systemFont(ofSize: 28, weight: .bold)
         nameTitleLabel.textColor = Colors.CreateAccount.whiteColor.color
         nameTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         nameTextField.attributedPlaceholder = NSAttributedString(
-            string: "Введи имя",
+            string: Localizations.YourName.sendName,
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray]
         )
         nameTextField.textColor = Colors.CreateAccount.whiteColor.color
@@ -87,7 +87,7 @@ final class YourNameView: UIView {
         delimiterView.backgroundColor = Colors.CreateAccount.lightGrayTetxColor.color
         delimiterView.translatesAutoresizingMaskIntoConstraints = false
         
-        warningLabel.text = "Ты можешь ввести имя только один раз. Возможности изменить его уже не будет."
+        warningLabel.text = Localizations.YourName.warning
         warningLabel.font = .systemFont(ofSize: 14, weight: .semibold)
         warningLabel.numberOfLines = 0
         warningLabel.textColor = Colors.CreateAccount.lightGrayTetxColor.color

@@ -60,13 +60,16 @@ extension MainScreanViewController {}
 // MARK: - MainScreanViewDelegate
 
 extension MainScreanViewController: MainScreanViewDelegate {
+    func rightSwipe() {
+        output?.openVideoFlow()
+    }
+    
     func didTapFilterButton() {
         output?.openFilter()
-        
     }
     
     func didTapEventButton() {
-        output?.openVideoFlow()
+        output?.openCreatingEvent()
     }
 }
 

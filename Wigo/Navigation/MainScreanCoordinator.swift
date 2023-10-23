@@ -71,6 +71,18 @@ final class MainScreanCoordinator: BaseCoordinator<Void, Void> {
 // MARK: - IntroModuleOutput
 
 extension MainScreanCoordinator: MainScreanModuleOutput {
+    func openCreatingEvent() {
+        let creatingEventCoordinator = CreatingEventCoordinator(navigationController: navigationController)
+
+        capture(coordinator: creatingEventCoordinator)
+        
+        creatingEventCoordinator.start(with: (), completionHandler: { [weak self, weak creatingEventCoordinator] _ in
+            guard let self = self, let creatingEventCoordinator = creatingEventCoordinator else { return }
+
+            self.decapture(coordinator: creatingEventCoordinator)
+        })
+    }
+    
     func openFilter() {
         let filtersViewController: UIViewController
         
@@ -143,10 +155,5 @@ extension MainScreanCoordinator: VideoPreviewModuleOutput {
 
             self.decapture(coordinator: matchCoordinator)
         })
-    }
-    
-    private func makeMockVideoURL() -> URL {
-        guard let mockVideoPath = Bundle.main.path(forResource: "SexyGirlDance", ofType:"MP4") else { fatalError() }
-        return URL(fileURLWithPath: mockVideoPath)
     }
 }

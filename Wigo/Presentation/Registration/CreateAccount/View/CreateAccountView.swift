@@ -31,7 +31,7 @@ final class CreateAccountView: UIView {
     private let delimiterView: UIView = .init()
     private let codeNoticeLabel: UILabel = .init()
     private let privacyPolicyButton: UIButton = .init()
-    private let continueButton: ContinueButton = .init(title: "Продолжить")
+    private let continueButton: ContinueButton = .init(title: Localizations.CreateAccount.continueButton)
     
     // MARK: - Initialization
     
@@ -55,12 +55,12 @@ final class CreateAccountView: UIView {
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabel.text = "Создать аккаунт"
+        titleLabel.text = Localizations.CreateAccount.title
         titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
         titleLabel.textColor = Colors.CreateAccount.whiteColor.color
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        myNumberLabel.text = "Мой номер"
+        myNumberLabel.text = Localizations.CreateAccount.myNumber
         myNumberLabel.font = .systemFont(ofSize: 28, weight: .bold)
         myNumberLabel.textColor = Colors.CreateAccount.whiteColor.color
         myNumberLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -82,7 +82,7 @@ final class CreateAccountView: UIView {
         delimiterView.backgroundColor = Colors.CreateAccount.lightGrayTetxColor.color
         delimiterView.translatesAutoresizingMaskIntoConstraints = false
         
-        codeNoticeLabel.text = "Мы отправим сообщение с кодом подтвеврждения. За отправку сообщения может взиматься плата."
+        codeNoticeLabel.text = Localizations.CreateAccount.codeNotice
         codeNoticeLabel.numberOfLines = 0
         codeNoticeLabel.font = .systemFont(ofSize: 14, weight: .semibold)
         codeNoticeLabel.textColor = .lightGray
@@ -91,19 +91,19 @@ final class CreateAccountView: UIView {
         let attributedString = NSMutableAttributedString()
 
         attributedString.append(NSAttributedString(
-            string: "Нажимая кнопку «Продолжить» ты соглашаешься на ",
+            string: Localizations.CreateAccount.PrivacyPolicy.firstAtttrebut,
             attributes: [.foregroundColor: Colors.CreateAccount.lightGrayTetxColor.color]
         ))
         attributedString.append(NSAttributedString(
-            string: "обработку персональных данных ",
+            string: Localizations.CreateAccount.PrivacyPolicy.twoAtttrebut,
             attributes: [.foregroundColor: Colors.CreateAccount.systemBlueTextColor.color]
         ))
         attributedString.append(NSAttributedString(
-            string: "и ",
+            string: Localizations.CreateAccount.PrivacyPolicy.thirdAtttrebut,
             attributes: [.foregroundColor: Colors.CreateAccount.lightGrayTetxColor.color]
         ))
         attributedString.append(NSAttributedString(
-            string: "политикой конфиденциальности ",
+            string: Localizations.CreateAccount.PrivacyPolicy.fourAtttrebut,
             attributes: [.foregroundColor: Colors.CreateAccount.systemBlueTextColor.color]
         ))
         

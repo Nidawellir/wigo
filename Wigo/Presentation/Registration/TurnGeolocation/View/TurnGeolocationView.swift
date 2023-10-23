@@ -28,7 +28,7 @@ final class TurnGeolocationView: UIView {
     private let imageView: UIImageView = .init()
     private let titleLabel: UILabel = .init()
     private let descriptionLabel: UILabel = .init()
-    private let turnButton: ContinueButton = .init(title: "Включить")
+    private let turnButton: ContinueButton = .init(title: Localizations.TurnNotification.turnButton)
     
     // MARK: - Initialization
     
@@ -47,14 +47,14 @@ final class TurnGeolocationView: UIView {
         imageView.image = Images.CreateAccount.geolocation.image
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabel.text = "Включи\n геолокацию"
+        titleLabel.text = Localizations.Geolocation.title
         titleLabel.font = .systemFont(ofSize: 28, weight: .bold)
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         titleLabel.textColor = Colors.CreateAccount.whiteColor.color
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        descriptionLabel.text = "Твоя локация будет помогать тебе находить интересных людей рядом"
+        descriptionLabel.text = Localizations.Geolocation.description
         descriptionLabel.font = .systemFont(ofSize: 14, weight: .medium)
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textAlignment = .center

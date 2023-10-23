@@ -26,7 +26,7 @@ final class TurnNotificationsView: UIView {
     private let imageView: UIImageView = .init()
     private let titleLabel: UILabel = .init()
     private let descriptionLabel: UILabel = .init()
-    private let turnButton: ContinueButton = .init(title: "Включить")
+    private let turnButton: ContinueButton = .init(title: Localizations.TurnNotification.turnButton)
     private let notNowLabel: UILabel = .init()
     
     // MARK: - Initialization
@@ -46,14 +46,14 @@ final class TurnNotificationsView: UIView {
         imageView.image = Images.CreateAccount.notification.image
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabel.text = "Включи\n уведомления"
+        titleLabel.text = Localizations.TurnNotification.title
         titleLabel.font = .systemFont(ofSize: 28, weight: .bold)
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         titleLabel.textColor = Colors.CreateAccount.whiteColor.color
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        descriptionLabel.text = "Уведомления позволят тебе всегда оставаться в центре событий."
+        descriptionLabel.text = Localizations.TurnNotification.description
         descriptionLabel.font = .systemFont(ofSize: 14, weight: .medium)
         descriptionLabel.numberOfLines = 0
         descriptionLabel.textAlignment = .center
@@ -64,7 +64,7 @@ final class TurnNotificationsView: UIView {
         turnButton.translatesAutoresizingMaskIntoConstraints = false
         
         notNowLabel.backgroundColor = .clear
-        notNowLabel.text = "Не сейчас"
+        notNowLabel.text = Localizations.TurnNotification.notNowButton
         notNowLabel.font = .systemFont(ofSize: 14, weight: .semibold)
         notNowLabel.textColor = .white
         notNowLabel.translatesAutoresizingMaskIntoConstraints = false

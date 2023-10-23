@@ -32,7 +32,7 @@ final class IntroView: UIView {
     private var collectionView: UICollectionView
     private var collectionViewFlowLayout: UICollectionViewFlowLayout
     private let pageControl: UIPageControl = .init()
-    private var continueButton: ContinueButton = .init(title: "далее")
+    private var continueButton: ContinueButton = .init(title: Localizations.Intro.ContinueButton.further)
     
     // MARK: - Initialization
     
@@ -42,7 +42,6 @@ final class IntroView: UIView {
             frame: CGRect.zero,
             collectionViewLayout: collectionViewFlowLayout
         )
-        
         super.init(frame: frame)
         
         configureViews()
@@ -56,7 +55,7 @@ final class IntroView: UIView {
         logoImage.translatesAutoresizingMaskIntoConstraints = false
         
         skipButton.backgroundColor = .clear
-        skipButton.setTitle("Пропустить", for: .normal)
+        skipButton.setTitle(Localizations.Intro.SkipButton.skip, for: .normal)
         skipButton.titleLabel?.textAlignment = .center
         skipButton.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
         skipButton.setTitleColor(Colors.CreateAccount.lightGrayTetxColor.color, for: .normal)
@@ -100,6 +99,10 @@ final class IntroView: UIView {
         
         if pageControl.currentPage == 3 {
             delegate?.didTapContinueButton()
+        }
+        
+        if pageControl.numberOfPages > 2 {
+            continueButton = .init(title: Localizations.Intro.ContinueButton.letsStart)
         }
     }
     

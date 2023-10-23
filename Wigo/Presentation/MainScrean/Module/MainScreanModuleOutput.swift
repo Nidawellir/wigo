@@ -10,4 +10,5 @@ import Foundation
 protocol MainScreanModuleOutput: AnyObject {
     func openVideoFlow()
     func openFilter()
+    func openCreatingEvent()
 }

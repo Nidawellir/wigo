@@ -35,7 +35,7 @@ final class YourBirthdayView: UIView {
     private let yearTextField: UITextField = .init()
     private let yearDelimiterView: UIView = .init()
     private let descriptionLabel: UILabel = .init()
-    private let continueButton: ContinueButton = .init(title: "Продолжить")
+    private let continueButton: ContinueButton = .init(title: Localizations.CreateAccount.continueButton)
     
     // MARK: - Initialization
     
@@ -63,12 +63,12 @@ final class YourBirthdayView: UIView {
         backButton.setImage(Images.CreateAccount.backArrow.image, for: .normal)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabel.text = "Создать аккаунт"
+        titleLabel.text = Localizations.CreateAccount.title
         titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
         titleLabel.textColor = Colors.CreateAccount.whiteColor.color
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        yourBirthdayTitleLabel.text = "Твой день рождения"
+        yourBirthdayTitleLabel.text = Localizations.YourBirthday.yourBirthday
         yourBirthdayTitleLabel.font = .systemFont(ofSize: 28, weight: .bold)
         yourBirthdayTitleLabel.textColor = Colors.CreateAccount.whiteColor.color
         yourBirthdayTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -119,7 +119,7 @@ final class YourBirthdayView: UIView {
         yearDelimiterView.backgroundColor = Colors.CreateAccount.lightGrayTetxColor.color
         yearDelimiterView.translatesAutoresizingMaskIntoConstraints = false
         
-        descriptionLabel.text = "Вам должно быть 18 лет или более"
+        descriptionLabel.text = Localizations.YourBirthday.description
         descriptionLabel.font = .systemFont(ofSize: 14, weight: .semibold)
         descriptionLabel.textColor = Colors.CreateAccount.lightGrayTetxColor.color
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false

@@ -32,7 +32,9 @@ final class VideoRecordingView: UIView {
     private var cameraConfig: CameraConfiguration!
     private let trackShape = CAShapeLayer()
     private let shape = CAShapeLayer()
-    private let circle: UIView = .init()
+    private let circleView: UIView = .init()
+    private let litlDotImageView: UIImageView = .init()
+    private let bigDotImageView: UIImageView = .init()
     
     // MARK: - Photo Output
     
@@ -96,9 +98,7 @@ final class VideoRecordingView: UIView {
         timerLabel.textColor = .white
         timerLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        shutterButton.setImage(Images.VideoRecord.record.image, for: .normal)
-        shutterButton.addTarget(self, action: #selector(buttonDown), for: .touchDown)
-        shutterButton.addTarget(self, action: #selector(buttonUp), for: [.touchUpInside, .touchUpOutside])
+        shutterButton.isHidden = true
         shutterButton.translatesAutoresizingMaskIntoConstraints = false
 
         toggleCameraButton.setImage(Images.VideoRecord.spiner.image, for: .normal)
@@ -109,18 +109,29 @@ final class VideoRecordingView: UIView {
         
         trackShape.path = circlePath.cgPath
         trackShape.fillColor = UIColor.clear.cgColor
-        trackShape.strokeColor = UIColor.lightGray.cgColor
+        trackShape.strokeColor = UIColor.darkGray.cgColor
         trackShape.lineWidth = 10
-        circle.layer.addSublayer(trackShape)
+        circleView.layer.addSublayer(trackShape)
         
         shape.path = circlePath.cgPath
         shape.lineWidth = 10
         shape.strokeColor = UIColor.white.cgColor
         shape.fillColor = UIColor.clear.cgColor
         shape.strokeEnd = 0
-        circle.layer.addSublayer(shape)
+        circleView.layer.addSublayer(shape)
         
-        circle.translatesAutoresizingMaskIntoConstraints = false
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        longPressGesture.minimumPressDuration = 0.2
+        circleView.addGestureRecognizer(longPressGesture)
+        circleView.translatesAutoresizingMaskIntoConstraints = false
+        
+        litlDotImageView.image = Images.VideoRecord.litleDot.image
+        litlDotImageView.isHidden = false
+        litlDotImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        bigDotImageView.image = Images.VideoRecord.bigDot.image
+        bigDotImageView.isHidden = true
+        bigDotImageView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     @objc
@@ -128,40 +139,44 @@ final class VideoRecordingView: UIView {
         delegate?.closeVideoRecording()
     }
     
+    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(step), userInfo: nil, repeats: true)
+            bigDotImageView.isHidden = false
+            litlDotImageView.isHidden = true
+
+            let animation = CABasicAnimation(keyPath: "strokeEnd")
+            animation.toValue = 1
+            animation.duration = 15
+            animation.isRemovedOnCompletion = true
+            animation.fillMode = .forwards
+            shape.add(animation, forKey: "animation")
+            
+            cameraConfig.recordVideo { (url, error) in
+                guard let url = url else {
+                    print(error ?? "Video recording error")
+                    return
+                }
+                UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(self.video(_:didFinishSavingWithError:contextInfo:)), nil)
+            }
+            
+        } else if gesture.state == .ended || gesture.state == .cancelled {
+            timer.invalidate()
+            
+            bigDotImageView.isHidden = true
+            litlDotImageView.isHidden = false
+            
+            cameraConfig.stopRecording { (error) in
+                print(error ?? "Video recording error")
+            }
+        }
+    }
+    
     @objc func video(_ video: String, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
         delegate?.openVideoPreview(videoUrl: video)
         timer.invalidate()
         count = 15
         timerLabel.text = "00:\(count)"
-    }
-    
-    @objc
-    private func buttonDown(_ sender: Any) {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(step), userInfo: nil, repeats: true)
-        print("111111")
-        let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.toValue = 1
-        animation.duration = 15
-        animation.isRemovedOnCompletion = false
-        animation.fillMode = .forwards
-        shape.add(animation, forKey: "animation")
-        
-        cameraConfig.recordVideo { (url, error) in
-            guard let url = url else {
-                print(error ?? "Video recording error")
-                return
-            }
-            UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, #selector(self.video(_:didFinishSavingWithError:contextInfo:)), nil)
-        }
-    }
-
-    @objc
-    private func buttonUp(_ sender: Any) {
-        timer.invalidate()
-        
-        cameraConfig.stopRecording { (error) in
-            print(error ?? "Video recording error")
-        }
     }
 
     @objc
@@ -194,8 +209,10 @@ final class VideoRecordingView: UIView {
         addSubview(timerView)
         addSubview(timerLabel)
         addSubview(shutterButton)
-        shutterButton.addSubview(circle)
+        addSubview(circleView)
         addSubview(toggleCameraButton)
+        addSubview(litlDotImageView)
+        addSubview(bigDotImageView)
         
         NSLayoutConstraint.activate([
             closeButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -222,10 +239,20 @@ final class VideoRecordingView: UIView {
             shutterButton.heightAnchor.constraint(equalToConstant: 72),
             shutterButton.widthAnchor.constraint(equalToConstant: 72),
             
-            circle.centerXAnchor.constraint(equalTo: shutterButton.centerXAnchor),
-            circle.centerYAnchor.constraint(equalTo: shutterButton.centerYAnchor),
-            circle.heightAnchor.constraint(equalToConstant: 72),
-            circle.widthAnchor.constraint(equalToConstant: 72),
+            circleView.centerXAnchor.constraint(equalTo: shutterButton.centerXAnchor),
+            circleView.centerYAnchor.constraint(equalTo: shutterButton.centerYAnchor),
+            circleView.heightAnchor.constraint(equalToConstant: 72),
+            circleView.widthAnchor.constraint(equalToConstant: 72),
+            
+            litlDotImageView.centerYAnchor.constraint(equalTo: circleView.centerYAnchor),
+            litlDotImageView.centerXAnchor.constraint(equalTo: circleView.centerXAnchor),
+            litlDotImageView.heightAnchor.constraint(equalToConstant: 20),
+            litlDotImageView.widthAnchor.constraint(equalToConstant: 20),
+            
+            bigDotImageView.centerYAnchor.constraint(equalTo: circleView.centerYAnchor),
+            bigDotImageView.centerXAnchor.constraint(equalTo: circleView.centerXAnchor),
+            bigDotImageView.heightAnchor.constraint(equalToConstant: 38),
+            bigDotImageView.widthAnchor.constraint(equalToConstant: 38),
             
             toggleCameraButton.leftAnchor.constraint(equalTo: shutterButton.rightAnchor, constant: 50),
             toggleCameraButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -50),

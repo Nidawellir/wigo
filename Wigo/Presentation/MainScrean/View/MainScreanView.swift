@@ -10,6 +10,7 @@ import UIKit
 protocol MainScreanViewDelegate: AnyObject {
     func didTapEventButton()
     func didTapFilterButton()
+    func rightSwipe()
 }
 
 final class MainScreanView: UIView {
@@ -114,6 +115,6 @@ extension MainScreanView: CustomNavigationBarDelegate {
 
 extension MainScreanView: VideoCardsContainerDelegate {
     func openMatchingFlow() {
-        delegate?.didTapEventButton()
+        delegate?.rightSwipe()
     }
 }

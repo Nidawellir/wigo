@@ -1,1 +1,56 @@
-"test" = "test";
+
+// Intro
+
+"Intro.skipButton.skip" = "Пропустить";
+"Intro.ContinueButton.further" = "Далее";
+"Intro.ContinueButton.letsStart" = "Давай начнем!";
+
+//CreateAccount
+
+"CreateAccount.title" = "Создать аккаунт";
+"CreateAccount.myNumber" = "Мой номер";
+"CreateAccount.codeNotice" = "Мы отправим сообщение с кодом подтвеврждения. За отправку сообщения может взиматься плата.";
+"CreateAccount.PrivacyPolicy.firstAtttrebut" = "Нажимая кнопку «Продолжить» ты соглашаешься на ";
+"CreateAccount.PrivacyPolicy.twoAtttrebut" = "обработку персональных данных ";
+"CreateAccount.PrivacyPolicy.thirdAtttrebut" = "и ";
+"CreateAccount.PrivacyPolicy.fourAtttrebut" = "политикой конфиденциальности ";
+"CreateAccount.continueButton" = "Продолжить";
+
+//YourName
+
+"YourName.yourName" = "Твое имя";
+"YourName.sendName" = "Введи имя";
+"YourName.warning" = "Ты можешь ввести имя только один раз. Возможности изменить его уже не будет.";
+
+// Your Birthday
+
+"YourBirthday.yourBirthday" = "Твой день рождения";
+"YourBirthday.description" = "Вам должно быть 18 лет или болееВам должно быть 18 лет или более";
+
+
+// Gender
+
+"Gender.You" = "Я";
+"Gender.male" = "Мужчина";
+"Gender.female" = "Женщина";
+
+// Notification
+
+"TurnNotification.title" = "Включи\n уведомления";
+"TurnNotification.description" = "Уведомления позволят тебе всегда оставаться в центре событий.";
+"TurnNotification.turnButton" = "Включить";
+"TurnNotification.notNowButton" = "Не сейчас";
+
+// Geolocation
+
+"Geolocation.title" = "Включи\n геолокацию";
+"Geolocation.description" = "Твоя локация будет помогать тебе находить интересных людей рядом";
+
+// MainScrean
+
+"MainScrean.hellow" = "Привет,";
+
+// MatchDescription
+
+"MatchDescription.description" = "Напишите здесь описание вашего мероприятия...";
+"MatchDescription.sendRequest" = "Отправить запрос";

@@ -28,9 +28,9 @@ final class GendereView: UIView {
     private let backButton: UIButton = .init()
     private let titleLabel: UILabel = .init()
     private let nameTitleLabel: UILabel = .init()
-    private let manGenderButton: GenderButton = .init(title: "Мужчина")
-    private let womanGenderButton: GenderButton = .init(title: "Женщина")
-    private let continueButton: ContinueButton = .init(title: "Продолжить")
+    private let manGenderButton: GenderButton = .init(title: Localizations.Gender.male)
+    private let womanGenderButton: GenderButton = .init(title: Localizations.Gender.female)
+    private let continueButton: ContinueButton = .init(title: Localizations.CreateAccount.continueButton)
     
     // MARK: - Initialization
     
@@ -54,12 +54,12 @@ final class GendereView: UIView {
         backButton.setImage(Images.CreateAccount.backArrow.image, for: .normal)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabel.text = "Создать аккаунт"
+        titleLabel.text = Localizations.CreateAccount.title
         titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
         titleLabel.textColor = Colors.CreateAccount.whiteColor.color
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        nameTitleLabel.text = "Я"
+        nameTitleLabel.text = Localizations.Gender.you
         nameTitleLabel.font = .systemFont(ofSize: 28, weight: .bold)
         nameTitleLabel.textColor = Colors.CreateAccount.whiteColor.color
         nameTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -99,9 +99,9 @@ final class GendereView: UIView {
     @objc
     private func didTapContinueButton() {
         if manGenderButton.isEnabled == false {
-            delegate?.didTapContinueButton(with: "Мужчина")
+            delegate?.didTapContinueButton(with: Localizations.Gender.male)
         } else {
-            delegate?.didTapContinueButton(with: "Женщина")
+            delegate?.didTapContinueButton(with: Localizations.Gender.female)
         }
         
         delegate?.openTurnGeolocation()

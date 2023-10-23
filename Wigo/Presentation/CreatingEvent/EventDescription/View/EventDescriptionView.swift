@@ -1,5 +1,5 @@
 //
-//  MatchDescriptionView.swift
+//  EventDescriptionView.swift
 //  Wigo-Native
 //
 //  Created by Apple User on 7/25/23.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol MatchDescriptionViewDelegate: AnyObject {
+protocol EventDescriptionViewDelegate: AnyObject {
     func didTapBackButton()
     func didTapThumbnailView()
     func openCompletedSendRequest()
 }
 
-final class MatchDescriptionView: UIView {
+final class EventDescriptionView: UIView {
     
     // MARK: - Constants
     
@@ -29,13 +29,19 @@ final class MatchDescriptionView: UIView {
         static let textViewMaxCharacters: Int = 140
         static let textLeadingSpace: CGFloat = 16.0
         static let textTrailingSpace: CGFloat = 20.0
+        static let buttonBottomSpace: CGFloat = 50.0
+        static let buttonHeight: CGFloat = 30.0
+        static let eventFiltersViewTopSpace: CGFloat = 30.0
+        static let segmentTopSpace: CGFloat = 10.0
     }
     
     // MARK: - Public properties
     
-    weak var delegate: MatchDescriptionViewDelegate?
+    weak var delegate: EventDescriptionViewDelegate?
     
     // MARK: - Private properties
+    
+    private var gender = ["Любой", "Мужчины", "Женщины"]
     
     // MARK: - UI properties
     
@@ -46,6 +52,12 @@ final class MatchDescriptionView: UIView {
     private let textView: UITextView = .init()
     private let placeholderLabel: UILabel = .init()
     private let charactersLabel: UILabel = .init()
+    private let eventFiltersView: EventFilters = .init()
+    private let addLocationView: UIView = .init()
+    private let addLocationLabel: UILabel = .init()
+    private let arrowImageView: UIImageView = .init()
+    private let genderLabel: UILabel = .init()
+    private var genderSegmentControll: UISegmentedControl = .init()
     private let sendButton: UIButton = .init()
     private let sendRequestLabel: UILabel = .init()
     
@@ -99,6 +111,33 @@ final class MatchDescriptionView: UIView {
         charactersLabel.alpha = 0.4
         charactersLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        eventFiltersView.translatesAutoresizingMaskIntoConstraints = false
+        
+        addLocationView.backgroundColor = Colors.MainScrean.cellBackground.color
+        addLocationView.layer.cornerRadius = 12
+        addLocationView.translatesAutoresizingMaskIntoConstraints = false
+        
+        addLocationLabel.text = "Добавить локацию"
+        addLocationLabel.font = .systemFont(ofSize: 14, weight: .semibold)
+        addLocationLabel.textColor = Colors.CreateAccount.whiteColor.color
+        addLocationLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        arrowImageView.image = Images.VideoRecord.arrow.image
+        arrowImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        genderLabel.text = "Выберете пол гостей".uppercased()
+        genderLabel.font = .systemFont(ofSize: 12, weight: .semibold)
+        genderLabel.textColor = Colors.MainScrean.cellBackground.color
+        genderLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        genderSegmentControll = UISegmentedControl(items: gender)
+        genderSegmentControll.backgroundColor = Colors.MainScrean.cellBackground.color
+        genderSegmentControll.layer.cornerRadius = 12
+//        genderSegmentControll.selectedSegmentIndex =
+        genderSegmentControll.selectedSegmentTintColor = Colors.CreateAccount.systemBlueTextColor.color
+//        genderSegmentControll.addTarget(self, action: #selector(didTapSegmentControll), for: .valueChanged)
+        genderSegmentControll.translatesAutoresizingMaskIntoConstraints = false
+        
         sendButton.backgroundColor = .clear
         sendButton.addTarget(self, action: #selector(didTapSendButton), for: .touchUpInside)
         sendButton.translatesAutoresizingMaskIntoConstraints = false
@@ -138,7 +177,16 @@ final class MatchDescriptionView: UIView {
         addSubview(textView)
         addSubview(placeholderLabel)
         addSubview(charactersLabel)
+        addSubview(eventFiltersView)
+        addSubview(addLocationView)
+        
+        addLocationView.addSubview(addLocationLabel)
+        addLocationView.addSubview(arrowImageView)
+        
+        addSubview(genderLabel)
+        addSubview(genderSegmentControll)
         addSubview(sendButton)
+        
         sendButton.addSubview(sendRequestLabel)
         
         NSLayoutConstraint.activate([
@@ -175,10 +223,33 @@ final class MatchDescriptionView: UIView {
             charactersLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.textTrailingSpace),
             charactersLabel.bottomAnchor.constraint(equalTo: thumbnailView.bottomAnchor),
             
-            sendButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            sendButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            sendButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -50),
-            sendButton.heightAnchor.constraint(equalToConstant: 30),
+            eventFiltersView.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: Constants.eventFiltersViewTopSpace),
+            eventFiltersView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            eventFiltersView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            addLocationView.topAnchor.constraint(equalTo: eventFiltersView.bottomAnchor, constant: Constants.thumbnailViewTopSpace),
+            addLocationView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.textLeadingSpace),
+            addLocationView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.textLeadingSpace),
+            
+            addLocationLabel.topAnchor.constraint(equalTo: addLocationView.topAnchor, constant: Constants.thumbnailViewTopSpace),
+            addLocationLabel.leadingAnchor.constraint(equalTo: addLocationView.leadingAnchor, constant: Constants.textLeadingSpace),
+            addLocationLabel.bottomAnchor.constraint(equalTo: addLocationView.bottomAnchor, constant: -Constants.thumbnailViewTopSpace),
+            
+            arrowImageView.centerYAnchor.constraint(equalTo: addLocationLabel.centerYAnchor),
+            arrowImageView.trailingAnchor.constraint(equalTo: addLocationView.trailingAnchor, constant: -Constants.textTrailingSpace),
+            
+            genderLabel.topAnchor.constraint(equalTo: addLocationView.bottomAnchor, constant: Constants.thumbnailViewTopSpace),
+            genderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.textLeadingSpace),
+            
+            genderSegmentControll.topAnchor.constraint(equalTo: genderLabel.bottomAnchor, constant: Constants.segmentTopSpace),
+            genderSegmentControll.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.textLeadingSpace),
+            genderSegmentControll.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.textTrailingSpace),
+            genderSegmentControll.heightAnchor.constraint(equalToConstant: 36),
+            
+            sendButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.backButtonLeadingSpace),
+            sendButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.backButtonLeadingSpace),
+            sendButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -Constants.buttonBottomSpace),
+            sendButton.heightAnchor.constraint(equalToConstant: Constants.backButtonLeadingSpace),
             
             sendRequestLabel.centerXAnchor.constraint(equalTo: sendButton.centerXAnchor),
             sendRequestLabel.centerYAnchor.constraint(equalTo: sendButton.centerYAnchor),
@@ -203,15 +274,32 @@ final class MatchDescriptionView: UIView {
 
 // MARK: - Public methods
 
-extension MatchDescriptionView {
+extension EventDescriptionView {
     func set(thumbnailImage: UIImage) {
         thumbnailImageView.image = thumbnailImage
+    }
+    
+    func setEventFilters(viewModel: [EventFiltersCollectionViewCell.ViewModel]) {
+        eventFiltersView.set(viewModels: viewModel)
+    }
+    func segmentControllBackground() {
+        let normalTextAttributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.foregroundColor: Colors.CreateAccount.whiteColor.color
+        ]
+        
+        genderSegmentControll.setTitleTextAttributes(normalTextAttributes, for: .normal)
+        
+        let selectedTextAttributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.foregroundColor: Colors.CreateAccount.whiteColor.color
+        ]
+        
+        genderSegmentControll.setTitleTextAttributes(selectedTextAttributes, for: .selected)
     }
 }
 
 // MARK: - UITextViewDelegate
 
-extension MatchDescriptionView: UITextViewDelegate {
+extension EventDescriptionView: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
         return newText.count <= Constants.textViewMaxCharacters
