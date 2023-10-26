@@ -13,5 +13,4 @@ protocol MatchDescriptionPresenterInput {
     
     func set(videoURL: URL)
     func fetchThumbnailImage()
-    func imageFromVideo(at time: TimeInterval) -> UIImage?
 }

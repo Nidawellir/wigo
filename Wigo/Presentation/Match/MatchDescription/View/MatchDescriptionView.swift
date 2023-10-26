@@ -205,7 +205,7 @@ final class MatchDescriptionView: UIView {
 
 extension MatchDescriptionView {
     func set(thumbnailImage: UIImage) {
-        thumbnailImageView.image = thumbnailImage
+        thumbnailImageView.image = thumbnailImage.rotate(radians: .pi/2)
     }
 }
 
