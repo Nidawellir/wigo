@@ -1,16 +1,20 @@
 PODS:
   - SwiftPhoneNumberFormatter (1.5)
+  - YandexMapsMobile (4.3.1-full)
 
 DEPENDENCIES:
   - SwiftPhoneNumberFormatter
+  - YandexMapsMobile (= 4.3.1-full)
 
 SPEC REPOS:
   trunk:
     - SwiftPhoneNumberFormatter
+    - YandexMapsMobile
 
 SPEC CHECKSUMS:
   SwiftPhoneNumberFormatter: 0cc91f4daa06dd606a9defb21048a75c36a771a2
+  YandexMapsMobile: 7e077fa079e4ae2b73ac85a6d5062fa91d04539b
 
-PODFILE CHECKSUM: c6afe8b14d1a5b7fe5c55ff2680cefcd9455732f
+PODFILE CHECKSUM: 9df8f373c5dd08d62e5209446f0f98d9f1a414ea
 
 COCOAPODS: 1.12.1

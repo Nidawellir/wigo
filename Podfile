@@ -6,5 +6,6 @@ target 'Wigo' do
   use_frameworks!
 
  pod "SwiftPhoneNumberFormatter"
+ pod 'YandexMapsMobile', '4.3.1-full'
 
 end

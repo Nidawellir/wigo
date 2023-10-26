@@ -5,6 +5,7 @@
 //  Created by Apple User on 7/25/23.
 //
 
+import UIKit
 import Foundation
 
 protocol MatchDescriptionPresenterInput {
@@ -12,4 +13,5 @@ protocol MatchDescriptionPresenterInput {
     
     func set(videoURL: URL)
     func fetchThumbnailImage()
+    func imageFromVideo(at time: TimeInterval) -> UIImage?
 }

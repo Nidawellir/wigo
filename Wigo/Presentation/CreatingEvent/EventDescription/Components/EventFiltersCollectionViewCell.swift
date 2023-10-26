@@ -9,7 +9,7 @@ import UIKit
 
 final class EventFiltersCollectionViewCell: UICollectionViewCell {
     
-    override var isHighlighted: Bool {
+    override var isSelected: Bool {
         didSet {
             updateUI()
         }
@@ -59,20 +59,19 @@ final class EventFiltersCollectionViewCell: UICollectionViewCell {
             containerView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
             titleLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 5),
             titleLabel.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -5),
-            titleLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
+            titleLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
         ])
     }
     
-    private func updateUI() {
-        if isHighlighted {
-            containerView.backgroundColor = Colors.MainScrean.cellBackground.color
-            titleLabel.textColor = Colors.CreateAccount.lightGrayTetxColor.color
-        } else {
+    func updateUI() {
+        if isSelected {
             containerView.backgroundColor = Colors.CreateAccount.systemBlueTextColor.color
             titleLabel.textColor = Colors.CreateAccount.whiteColor.color
+        } else {
+            containerView.backgroundColor = Colors.MainScrean.cellBackground.color
+            titleLabel.textColor = Colors.CreateAccount.lightGrayTetxColor.color
         }
     }
     

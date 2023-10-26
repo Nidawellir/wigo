@@ -9,7 +9,7 @@ import UIKit
 
 final class FilterCollectionViewCell: UICollectionViewCell {
     
-    override var isHighlighted: Bool {
+    override var isSelected: Bool {
         didSet {
             updateUI()
         }
@@ -67,12 +67,12 @@ final class FilterCollectionViewCell: UICollectionViewCell {
     }
     
     private func updateUI() {
-        if isHighlighted {
-            containerView.backgroundColor = Colors.MainScrean.cellBackground.color
-            titleLabel.textColor = Colors.CreateAccount.lightGrayTetxColor.color
-        } else {
+        if isSelected {
             containerView.backgroundColor = Colors.CreateAccount.whiteColor.color
             titleLabel.textColor = Colors.CreateAccount.darkBackground.color
+        } else {
+            containerView.backgroundColor = Colors.MainScrean.cellBackground.color
+            titleLabel.textColor = Colors.CreateAccount.lightGrayTetxColor.color
         }
     }
     

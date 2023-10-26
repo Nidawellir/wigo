@@ -11,4 +11,5 @@ protocol EventDescriptionModuleOutput: AnyObject {
     func closeEventDescriptionMatch()
     func openPreviewVideo(with videoURL: URL)
     func openCompletedSendRequest()
+    func openMeetingPoint()
 }

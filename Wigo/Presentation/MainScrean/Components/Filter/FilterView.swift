@@ -48,6 +48,7 @@ final class FilterView: UIView {
         collectionView.clipsToBounds = false
         collectionView.layer.masksToBounds = false
         collectionView.backgroundColor = .clear
+        collectionView.allowsMultipleSelection = true
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
@@ -68,7 +69,7 @@ final class FilterView: UIView {
             collectionView.leftAnchor.constraint(equalTo: leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: rightAnchor),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 20),
+            collectionView.heightAnchor.constraint(equalToConstant: 30),
         ])
     }
     

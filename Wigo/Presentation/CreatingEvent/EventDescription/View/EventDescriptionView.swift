@@ -10,6 +10,7 @@ import UIKit
 protocol EventDescriptionViewDelegate: AnyObject {
     func didTapBackButton()
     func didTapThumbnailView()
+    func openMeetingPoint()
     func openCompletedSendRequest()
 }
 
@@ -113,11 +114,13 @@ final class EventDescriptionView: UIView {
         
         eventFiltersView.translatesAutoresizingMaskIntoConstraints = false
         
+        
+        addLocationView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapAddLocationView)))
         addLocationView.backgroundColor = Colors.MainScrean.cellBackground.color
         addLocationView.layer.cornerRadius = 12
         addLocationView.translatesAutoresizingMaskIntoConstraints = false
         
-        addLocationLabel.text = "Добавить локацию"
+        addLocationLabel.text = Localizations.EventDescription.addLocation
         addLocationLabel.font = .systemFont(ofSize: 14, weight: .semibold)
         addLocationLabel.textColor = Colors.CreateAccount.whiteColor.color
         addLocationLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -125,7 +128,7 @@ final class EventDescriptionView: UIView {
         arrowImageView.image = Images.VideoRecord.arrow.image
         arrowImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        genderLabel.text = "Выберете пол гостей".uppercased()
+        genderLabel.text = Localizations.EventDescription.genderChange.uppercased()
         genderLabel.font = .systemFont(ofSize: 12, weight: .semibold)
         genderLabel.textColor = Colors.MainScrean.cellBackground.color
         genderLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -142,7 +145,7 @@ final class EventDescriptionView: UIView {
         sendButton.addTarget(self, action: #selector(didTapSendButton), for: .touchUpInside)
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         
-        sendRequestLabel.text = Localizations.MatchDescription.sendRequest
+        sendRequestLabel.text = Localizations.EventDescription.publish
         sendRequestLabel.textAlignment = .center
         sendRequestLabel.font = .systemFont(ofSize: 14, weight: .semibold)
         sendRequestLabel.textColor = Colors.CreateAccount.lightGrayTetxColor.color
@@ -165,6 +168,11 @@ final class EventDescriptionView: UIView {
     
     private func updateCharactersLabelText() {
         charactersLabel.text = "\(textView.text.count)/\(Constants.textViewMaxCharacters)"
+    }
+    
+    @objc
+    private func didTapAddLocationView(_ gesture: UIGestureRecognizer) {
+        delegate?.openMeetingPoint()
     }
     
     private func configureLayouts() {
@@ -257,7 +265,7 @@ final class EventDescriptionView: UIView {
     }
     
     private func hideKeyboardIfTap() {
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+//        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
     
     @objc
@@ -282,6 +290,7 @@ extension EventDescriptionView {
     func setEventFilters(viewModel: [EventFiltersCollectionViewCell.ViewModel]) {
         eventFiltersView.set(viewModels: viewModel)
     }
+    
     func segmentControllBackground() {
         let normalTextAttributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.foregroundColor: Colors.CreateAccount.whiteColor.color
@@ -294,6 +303,15 @@ extension EventDescriptionView {
         ]
         
         genderSegmentControll.setTitleTextAttributes(selectedTextAttributes, for: .selected)
+    }
+    
+    func setGeolocation(longitude: Double, latitude: Double, address: String) {
+        let cleanString = address
+        
+        addLocationLabel.text = cleanString
+        addLocationLabel.textColor = Colors.CreateAccount.systemBlueTextColor.color
+        
+        arrowImageView.image  = Images.Map.checkMark.image
     }
 }
 

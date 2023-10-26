@@ -54,3 +54,15 @@
 
 "MatchDescription.description" = "Напишите здесь описание вашего мероприятия...";
 "MatchDescription.sendRequest" = "Отправить запрос";
+
+// EventDescription
+
+"EventDescription.addLocation" = "Добавить локацию";
+"EventDescription.genderChange" = "Выберете пол гостей";
+"EventDescription.publish" = "Опубликовать";
+
+// MeetingPoint
+
+"MeetingPoint.sendGeolocation" = "Отправить геопозицию";
+"MeetingPoint.accuracy" = "С точностью до 20 метров";
+"MeetingPoint.changeLocation" = "или выбрать место";

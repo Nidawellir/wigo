@@ -9,4 +9,5 @@ import Foundation
 
 protocol EventDescriptionModuleInput: AnyObject {
     func set(videoURL: URL)
+    func getGeolocation(longitude: Double, latitude: Double, address: String)
 }

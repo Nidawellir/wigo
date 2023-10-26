@@ -46,8 +46,9 @@ final class EventFilters: UIView {
         
         collectionView.isPagingEnabled = true
         collectionView.clipsToBounds = false
-//        collectionView.layer.masksToBounds = false
+        collectionView.layer.masksToBounds = false
         collectionView.backgroundColor = .clear
+        collectionView.allowsMultipleSelection = true
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
@@ -68,7 +69,7 @@ final class EventFilters: UIView {
             collectionView.leftAnchor.constraint(equalTo: leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: rightAnchor),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 20),
+            collectionView.heightAnchor.constraint(equalToConstant: 30),
         ])
     }
     
@@ -114,14 +115,10 @@ extension EventFilters: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: eventFiltersModels[indexPath.item].title.size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)]).width + 25, height: 30)
     }
-    
+}
+
+extension EventFilters: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Этот метод вызывается при нажатии на ячейку коллекции
-        let selectedItem = eventFiltersModels[indexPath.item]
-        print("Выбран элемент:")
-    
-        
-        
-        // Ваша логика обработки нажатия на ячейку
+        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
     }
 }

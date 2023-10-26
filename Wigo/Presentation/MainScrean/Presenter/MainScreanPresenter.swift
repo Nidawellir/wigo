@@ -23,14 +23,7 @@ final class MainScreanPresenter {
         .init(title: "asdad123"),
         .init(title: "asdada"),
         .init(title: "asda123"),
-        .init(title: "asdggg11233"),
-        .init(title: "asdggg2132"),
-        .init(title: "asdggg1231"),
-        .init(title: "asdggg1233"),
-        .init(title: "asdggg123"),
-        .init(title: "asdggg123"),
-        .init(title: "asdggg1233"),
-        .init(title: "asdggg133"),
+       
     ]
     
     private let matchingFiltersModel: [MatchingFiltersCollectionViewCell.ViewModel] = [

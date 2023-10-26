@@ -30,6 +30,14 @@ internal enum Localizations {
       internal static let twoAtttrebut = Localizations.tr("Localizable", "CreateAccount.PrivacyPolicy.twoAtttrebut", fallback: "обработку персональных данных ")
     }
   }
+  internal enum EventDescription {
+    /// Добавить локацию
+    internal static let addLocation = Localizations.tr("Localizable", "EventDescription.addLocation", fallback: "Добавить локацию")
+    /// Выберете пол гостей
+    internal static let genderChange = Localizations.tr("Localizable", "EventDescription.genderChange", fallback: "Выберете пол гостей")
+    /// Опубликовать
+    internal static let publish = Localizations.tr("Localizable", "EventDescription.publish", fallback: "Опубликовать")
+  }
   internal enum Gender {
     /// Женщина
     internal static let female = Localizations.tr("Localizable", "Gender.female", fallback: "Женщина")
@@ -66,6 +74,14 @@ internal enum Localizations {
     internal static let description = Localizations.tr("Localizable", "MatchDescription.description", fallback: "Напишите здесь описание вашего мероприятия...")
     /// Отправить запрос
     internal static let sendRequest = Localizations.tr("Localizable", "MatchDescription.sendRequest", fallback: "Отправить запрос")
+  }
+  internal enum MeetingPoint {
+    /// С точностью до 20 метров
+    internal static let accuracy = Localizations.tr("Localizable", "MeetingPoint.accuracy", fallback: "С точностью до 20 метров")
+    /// или выбрать место
+    internal static let changeLocation = Localizations.tr("Localizable", "MeetingPoint.changeLocation", fallback: "или выбрать место")
+    /// Отправить геопозицию
+    internal static let sendGeolocation = Localizations.tr("Localizable", "MeetingPoint.sendGeolocation", fallback: "Отправить геопозицию")
   }
   internal enum TurnNotification {
     /// Уведомления позволят тебе всегда оставаться в центре событий.

@@ -55,6 +55,10 @@ final class EventDescriptionViewController: UIViewController {
 // MARK: - EventDescriptionModuleInput
 
 extension EventDescriptionViewController: EventDescriptionModuleInput {
+    func getGeolocation(longitude: Double, latitude: Double, address: String) {
+        eventDescriptionView.setGeolocation(longitude: longitude, latitude: latitude, address: address)
+    }
+    
     func set(videoURL: URL) {
         presenter.set(videoURL: videoURL)
     }
@@ -75,6 +79,10 @@ extension EventDescriptionViewController: EventDescriptionPresenterOutput {
 // MARK: - EventDescriptionViewDelegate
 
 extension EventDescriptionViewController: EventDescriptionViewDelegate {
+    func openMeetingPoint() {
+        output?.openMeetingPoint()
+    }
+    
     func openCompletedSendRequest() {
         output?.openCompletedSendRequest()
     }
